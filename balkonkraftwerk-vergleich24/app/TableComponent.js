@@ -206,7 +206,9 @@ export default function MaterialUITable() {
                   <TableCell>{row.wechselrichter ? 'Ja' : 'Nein'}</TableCell>
                   <TableCell>{row.bidirektional ? 'Ja' : 'Nein'}</TableCell>
                   <TableCell>{row.ladeanschluss ? 'Ja' : 'Nein'}</TableCell>
-                  <TableCell>{row.website}</TableCell>
+                  <TableCell>
+                      <a href={row.website} target="_blank" rel="noopener noreferrer">Hersteller-Link</a>
+                  </TableCell>
                   <TableCell>{row.amazon}</TableCell>
                 </TableRow>
               ))}

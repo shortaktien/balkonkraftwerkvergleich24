@@ -1,0 +1,4 @@
+@TODO
+- links unter Webseite schöner machen
+- links die nicht exestieren anders darstellen
+- Amazon Links
