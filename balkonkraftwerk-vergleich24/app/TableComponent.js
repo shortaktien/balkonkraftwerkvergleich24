@@ -1,67 +1,67 @@
 import React from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination, Paper } from '@mui/material';
+import { 
+    Table, 
+    TableBody, 
+    TableCell, 
+    TableContainer, 
+    TableHead, 
+    TableRow, 
+    TablePagination, 
+    Paper,
+    TableSortLabel,
+ } from '@mui/material';
 
-// Produkt-Daten
-const rows = [
-  {
-    name: "Zendure AIO 2400",
-    akkukapazitaet: "2400Wh",
-    maxKapazitaet: "-",
-    erweiterbar: "",
-    ladezyklen: 8000,
-    garantie: 10,
-    anzahlMPPT: 2,
-    maxMC4: 2,
-    maxEingang: "1200W",
-    maxEingangModule: "1560W",
-    solarErweiterbar: false,
-    mppt1A: "16A",
-    mppt1V: "60V",
-    mppt2A: "28A",
-    mppt2V: "60V",
-    mppt3A: "-",
-    mppt3V: "-",
-    mppt4A: "-",
-    mppt4V: "-",
-    gewichtAkku: "31,3kg",
-    gewichtLaderegler: "-",
-    akkuLaenge: "657mm",
-    akkuBreite: "427mm",
-    akkuHoehe: "150mm",
-    ladereglerLaenge: "-",
-    ladereglerBreite: "-",
-    ladereglerHoehe: "-",
-    bt: true,
-    wifi: true,
-    app: true,
-    cloud: true,
-    mqttCloud: "In Planung",
-    mqttOffline: "OpenSource",
-    heizung: true,
-    ipKlasse: 65,
-    notstrom: false,
-    maxAusgang: "-",
-    shellyPro: true,
-    wechselrichter: false,
-    bidirektional: false,
-    ladeanschluss: false,
-    website: "-",
-    amazon: "-",
-  },
-];
+ import rows from './products.json';
 
 export default function MaterialUITable() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5); 
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(5); 
+    const [order, setOrder] = React.useState('asc');
+    const [orderBy, setOrderBy] = React.useState('name');
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+    const handleRequestSort = (event, property) => {
+        const isAsc = orderBy === property && order === 'asc';
+        setOrder(isAsc ? 'desc' : 'asc');
+        setOrderBy(property);
+      };
+    
+      const stableSort = (array, comparator) => {
+        const stabilizedThis = array.map((el, index) => [el, index]);
+        stabilizedThis.sort((a, b) => {
+          const order = comparator(a[0], b[0]);
+          if (order !== 0) return order;
+          return a[1] - b[1];
+        });
+        return stabilizedThis.map((el) => el[0]);
+      };
+    
+      const descendingComparator = (a, b, orderBy) => {
+        if (b[orderBy] < a[orderBy]) {
+          return -1;
+        }
+        if (b[orderBy] > a[orderBy]) {
+          return 1;
+        }
+        return 0;
+      };
+    
+      const getComparator = (order, orderBy) => {
+        return order === 'desc'
+          ? (a, b) => descendingComparator(a, b, orderBy)
+          : (a, b) => -descendingComparator(a, b, orderBy);
+      };
+    
+      const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+      };
+    
+      const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+      };
+    
+      const visibleRows = stableSort(rows, getComparator(order, orderBy))
+        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -70,11 +70,56 @@ export default function MaterialUITable() {
           <TableHead>
             <TableRow>
               {/* Table Headers with fixed widths */}
-              <TableCell style={{ width: 150 }}>Name</TableCell>
-              <TableCell style={{ width: 150 }}>Akkukapazität</TableCell>
-              <TableCell style={{ width: 150 }}>Max. Akkukapazität</TableCell>
-              <TableCell style={{ width: 150 }}>Erweiterbar</TableCell>
-              <TableCell style={{ width: 150 }}>Ladezyklen</TableCell>
+              <TableCell style={{ width: 150 }} sortDirection={orderBy === 'name' ? order : false}>
+                <TableSortLabel
+                  active={orderBy === 'name'}
+                  direction={orderBy === 'name' ? order : 'asc'}
+                  onClick={(event) => handleRequestSort(event, 'name')}
+                >
+                  Name
+                </TableSortLabel>
+              </TableCell>
+              
+              <TableCell style={{ width: 150 }} sortDirection={orderBy === 'akkukapazitaet' ? order : false}>
+                <TableSortLabel
+                  active={orderBy === 'akkukapazitaet'}
+                  direction={orderBy === 'akkukapazitaet' ? order : 'asc'}
+                  onClick={(event) => handleRequestSort(event, 'akkukapazitaet')}
+                >
+                  Akkukapazität
+                </TableSortLabel>
+              </TableCell>
+              
+              <TableCell style={{ width: 150 }} sortDirection={orderBy === 'maxKapazitaet' ? order : false}>
+                <TableSortLabel
+                  active={orderBy === 'maxKapazitaet'}
+                  direction={orderBy === 'maxKapazitaet' ? order : 'asc'}
+                  onClick={(event) => handleRequestSort(event, 'maxKapazitaet')}
+                >
+                 Max. Kapazität
+                </TableSortLabel>
+              </TableCell>
+
+              <TableCell style={{ width: 150 }} sortDirection={orderBy === 'erweiterbar' ? order : false}>
+                <TableSortLabel
+                  active={orderBy === 'erweiterbar'}
+                  direction={orderBy === 'erweiterbar' ? order : 'asc'}
+                  onClick={(event) => handleRequestSort(event, 'erweiterbar')}
+                >
+                 Erweiterbar
+                </TableSortLabel>
+              </TableCell>
+              
+              <TableCell style={{ width: 150 }} sortDirection={orderBy === 'ladezyklen' ? order : false}>
+                <TableSortLabel
+                  active={orderBy === 'ladezyklen'}
+                  direction={orderBy === 'ladezyklen' ? order : 'asc'}
+                  onClick={(event) => handleRequestSort(event, 'ladezyklen')}
+                >
+                 Ladezyklen
+                </TableSortLabel>
+              </TableCell>
+
               <TableCell style={{ width: 150 }}>Garantie</TableCell>
               <TableCell style={{ width: 150 }}>Anzahl MPPT</TableCell>
               <TableCell style={{ width: 150 }}>Max. MC4</TableCell>
@@ -117,14 +162,14 @@ export default function MaterialUITable() {
 
           <TableBody>
             {/* Rendering Rows */}
-            {rows
+            {visibleRows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, index) => (
-                <TableRow key={index}>
+                <TableRow key={index} tabIndex={-1}>
                   <TableCell>{row.name}</TableCell>
                   <TableCell>{row.akkukapazitaet}</TableCell>
                   <TableCell>{row.maxKapazitaet}</TableCell>
-                  <TableCell>{row.erweiterbar || 'Nein'}</TableCell>
+                  <TableCell>{row.erweiterbar ? 'Ja' : 'Nein'}</TableCell>
                   <TableCell>{row.ladezyklen}</TableCell>
                   <TableCell>{row.garantie}</TableCell>
                   <TableCell>{row.anzahlMPPT}</TableCell>
@@ -149,18 +194,18 @@ export default function MaterialUITable() {
                   <TableCell>{row.ladereglerBreite}</TableCell>
                   <TableCell>{row.ladereglerHoehe}</TableCell>
                   <TableCell>{row.bt ? 'Ja' : 'Nein'}</TableCell>
-                  <TableCell>{row.wifi}</TableCell>
-                  <TableCell>{row.app}</TableCell>
-                  <TableCell>{row.cloud}</TableCell>
-                  <TableCell>{row.mqttCloud}</TableCell>
-                  <TableCell>{row.heizung}</TableCell>
+                  <TableCell>{row.wifi ? 'Ja' : 'Nein'}</TableCell>
+                  <TableCell>{row.app ? 'Ja' : 'Nein'}</TableCell>
+                  <TableCell>{row.cloud ? 'Ja' : 'Nein'}</TableCell>
+                  <TableCell>{row.mqttCloud ? 'Ja' : 'Nein'}</TableCell>
+                  <TableCell>{row.heizung ? 'Ja' : 'Nein'}</TableCell>
                   <TableCell>{row.ipKlasse}</TableCell>
-                  <TableCell>{row.notstrom}</TableCell>
+                  <TableCell>{row.notstrom ? 'Ja' : 'Nein'}</TableCell>
                   <TableCell>{row.maxAusgang}</TableCell>
-                  <TableCell>{row.shellyPro}</TableCell>
-                  <TableCell>{row.wechselrichter}</TableCell>
-                  <TableCell>{row.bidirektional}</TableCell>
-                  <TableCell>{row.ladeanschluss}</TableCell>
+                  <TableCell>{row.shellyPro ? 'Ja' : 'Nein'}</TableCell>
+                  <TableCell>{row.wechselrichter ? 'Ja' : 'Nein'}</TableCell>
+                  <TableCell>{row.bidirektional ? 'Ja' : 'Nein'}</TableCell>
+                  <TableCell>{row.ladeanschluss ? 'Ja' : 'Nein'}</TableCell>
                   <TableCell>{row.website}</TableCell>
                   <TableCell>{row.amazon}</TableCell>
                 </TableRow>
