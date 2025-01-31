@@ -12,7 +12,6 @@ import PowerIcon from '@mui/icons-material/Power';
 
 export default function TableFilters({ filters, setFilters, minAkkukapazitaet, setMinAkkukapazitaet, minEingang, setMinEingang }) {
     const [showFilters, setShowFilters] = useState(false);
-    const [showSettings, setShowSettings] = useState(false);
 
     //--------------------Checkbox Eigenschaften-------------------------
     const handleCheckboxChange = (event) => {
@@ -49,7 +48,7 @@ export default function TableFilters({ filters, setFilters, minAkkukapazitaet, s
             
             {/*Ein und Ausklappen der Filter*/}
             {showFilters && (
-                <Paper elevation={5} >
+                <Paper elevation={5} sx={{ width: '100%', marginTop: '10px', padding: '15px' }}>
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '10px', marginBottom: '20px' }}>
                     <FormGroup sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', padding: '15px' }}>
 

@@ -7,7 +7,7 @@ import {
   Box,
   Button,
 } from "@mui/material";
-import SettingsIcon from "@mui/icons-material/Settings";
+import EditAttributesIcon from '@mui/icons-material/EditAttributes';
 
 const columnOptions = {
   name: "Produktname",
@@ -71,12 +71,12 @@ export default function TableUserSettings({ visibleColumns, setVisibleColumns })
 
   return (
     <div>
-      <Button variant="contained" onClick={toggleSettings} startIcon={<SettingsIcon />}>
-        {showSettings ? "Einstellungen verbergen" : "Spalten anpassen"}
+      <Button variant="contained" onClick={toggleSettings} startIcon={<EditAttributesIcon />} >
+        {showSettings ? "Einstellungen verbergen" : "Eigenscahften An/Ausschalten"}
       </Button>
 
       {showSettings && (
-        <Paper elevation={5} sx={{ marginTop: "10px", padding: "15px" }}>
+        <Paper elevation={5} sx={{width: '100%', padding: '15px', marginTop: "10px" }}>
           <Box sx={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
             <FormGroup sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
               {Object.entries(columnOptions).map(([key, label]) => (
