@@ -9,12 +9,13 @@ export default function Home() {
       <main className={styles.main}>
         <p>Test</p>
 
-        {/* Hier wird die Tabelle eingefügt */}
+        
         <TableComponent />
+
       </main>
 
       <footer className={styles.footer}>
-        <p>Das ist der Footer</p>
+        <p>Made by Alexander</p>
       </footer>
     </div>
   );

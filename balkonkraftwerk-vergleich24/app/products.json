@@ -1,7 +1,7 @@
 [
   {
       "name": "Zendure AIO 2400",
-      "akkukapazitaet": "2400Wh",
+      "akkukapazitaet": 2400,
       "maxKapazitaet": "-",
       "erweiterbar": false,
       "ladezyklen": 8000,
@@ -31,7 +31,7 @@
       "wifi": true,
       "app": true,
       "cloud": true,
-      "mqttCloud": "In Planung",
+      "mqttCloud": false,
       "mqttOffline": "OpenSource",
       "heizung": true,
       "ipKlasse": 65,
@@ -46,7 +46,7 @@
   },
   {
       "name": "Zendure SolarFlow 2000",
-      "akkukapazitaet": "1920Wh",
+      "akkukapazitaet": 1920,
       "maxKapazitaet": "7680Wh",
       "erweiterbar": true,
       "ladezyklen": 6000,
@@ -91,7 +91,7 @@
   },
   {
     "name": "Zendure SolarFlow Hyper 2000",
-    "akkukapazitaet": "1920Wh",
+    "akkukapazitaet": "1920",
     "maxKapazitaet": "7680Wh",
     "erweiterbar": true,
     "ladezyklen": 6000,

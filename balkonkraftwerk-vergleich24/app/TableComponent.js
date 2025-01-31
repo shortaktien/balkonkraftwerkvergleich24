@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
     Table, 
     TableBody, 
@@ -12,12 +12,29 @@ import {
  } from '@mui/material';
 
  import rows from './products.json';
+ import TableFilters from './TableFilters';
 
 export default function MaterialUITable() {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5); 
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('name');
+    const [minAkkukapazitaet, setMinAkkukapazitaet] = useState("");
+    const [minEingang, setMinEingang] = useState("");
+    const [filters, setFilters] = useState({
+      app: false,
+      bt: false,
+      wifi: false,
+      cloud: false,
+      erweiterbar: false,
+      mqttCloud: false,
+      heizung: false,
+      notstrom: false,
+      shellyPro: false,
+      wechselrichter: false,
+      bidirektional: false,
+      ladeanschluss: false,
+  });
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -59,17 +76,62 @@ export default function MaterialUITable() {
         setRowsPerPage(+event.target.value);
         setPage(0);
       };
+
+    // Filterlogik: Zeige nur Produkte, die die Checkboxen erfüllen--------------
+    const filteredRows = rows.filter((row) => {
+      let showRow = true;
+      if (filters.app && !row.app) showRow = false;
+      if (filters.bt && !row.bt) showRow = false;
+      if (filters.wifi && !row.wifi) showRow = false;
+      if (filters.cloud && !row.cloud) showRow = false;
+      if (filters.erweiterbar && !row.erweiterbar) showRow = false;
+      if (filters.mqttCloud && !row.mqttCloud) showRow = false;
+      if (filters.heizung && !row.heizung) showRow = false;
+      if (filters.notstrom && !row.notstrom) showRow = false;
+      if (filters.shellyPro && !row.shellyPro) showRow = false;
+      if (filters.wechselrichter && !row.wechselrichter) showRow = false;
+      if (filters.bidirektional && !row.bidirektional) showRow = false;
+      if (filters.ladeanschluss && !row.ladeanschluss) showRow = false;
+      
+      // Akkukapazität filtern
+      const minAkkukapazitaetValue = parseInt(minAkkukapazitaet, 10); // Eingabe des Users umwandeln
+      const rowAkkukapazitaetValue = parseInt(row.akkukapazitaet, 10); // JSON-Daten umwandeln
+      
+      //console.log(`Eingabe Min Akku: ${minAkkukapazitaetValue}, Produkt Akku: ${rowAkkukapazitaetValue}`);
+
+      //Mindest Akkukapazität
+      if (!isNaN(minAkkukapazitaetValue) && !isNaN(rowAkkukapazitaetValue)) {
+        if (rowAkkukapazitaetValue < minAkkukapazitaetValue) {
+            showRow = false;
+        }
+      }
+
+      const minEingangValue = parseInt(minEingang, 10);
+      const rowEingangValue = parseInt(row.maxEingang, 10);
+
+      //Mindest Eingang Filter
+      if (!isNaN(minEingangValue) && !isNaN(rowEingangValue)) {
+        if (rowEingangValue < minEingangValue) {
+          showRow = false;
+        }
+      }
+
+      return showRow;
+  });
     
-      const visibleRows = stableSort(rows, getComparator(order, orderBy))
+      const visibleRows = stableSort(filteredRows, getComparator(order, orderBy))
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+    <div>
+            <TableFilters filters={filters} setFilters={setFilters} minAkkukapazitaet={minAkkukapazitaet} setMinAkkukapazitaet={setMinAkkukapazitaet} minEingang={minEingang} setMinEingang={setMinEingang}/>
+    <Paper elevation={5} sx={{ width: '100%', overflow: 'hidden', marginTop: '10px', marginBottom: '20px'}}>
       <TableContainer sx={{ maxHeight: 440, overflowX: 'auto' }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {/* Table Headers with fixed widths */}
+              
+
               <TableCell style={{ width: 150 }} sortDirection={orderBy === 'name' ? order : false}>
                 <TableSortLabel
                   active={orderBy === 'name'}
@@ -226,5 +288,6 @@ export default function MaterialUITable() {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
+    </div>
   );
 }
