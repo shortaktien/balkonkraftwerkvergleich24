@@ -1,10 +1,7 @@
 import React, {useState} from 'react';
 import { Checkbox, FormGroup, FormControlLabel, Divider } from '@mui/material';
-import { blue, black } from '@mui/material/colors';
-import Input from '@mui/material/Input';
-import InputLabel from '@mui/material/InputLabel';
+import { blue } from '@mui/material/colors';
 import InputAdornment from '@mui/material/InputAdornment';
-import FormControl from '@mui/material/FormControl';
 import BatteryChargingFullIcon from '@mui/icons-material/BatteryChargingFull';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -15,8 +12,9 @@ import PowerIcon from '@mui/icons-material/Power';
 
 export default function TableFilters({ filters, setFilters, minAkkukapazitaet, setMinAkkukapazitaet, minEingang, setMinEingang }) {
     const [showFilters, setShowFilters] = useState(false);
+    const [showSettings, setShowSettings] = useState(false);
 
-    //--------------------Checkbox------------------------------------
+    //--------------------Checkbox Eigenschaften-------------------------
     const handleCheckboxChange = (event) => {
         const { name, checked } = event.target;
         setFilters((prevFilters) => ({
@@ -28,6 +26,7 @@ export default function TableFilters({ filters, setFilters, minAkkukapazitaet, s
     const toggleFilters = () => {
         setShowFilters((prev) => !prev);  
     };
+    
     //-----------------------------------------------------------------
     
     //--------------------Filter MinKapazität--------------------------
@@ -45,8 +44,8 @@ export default function TableFilters({ filters, setFilters, minAkkukapazitaet, s
     return (
         <div>
             <Button name="filterButton" variant="contained" onClick={toggleFilters} startIcon={<FilterAltIcon />}>
-                {showFilters ? 'Filter Verbergen' : 'Balkonspeicher Filtern'}
-            </Button>                        
+                {showFilters ? 'Filter Verbergen' : 'Eigenschaften Filtern'}
+            </Button>                    
             
             {/*Ein und Ausklappen der Filter*/}
             {showFilters && (
@@ -55,12 +54,11 @@ export default function TableFilters({ filters, setFilters, minAkkukapazitaet, s
                     <FormGroup sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', padding: '15px' }}>
 
                     <Box sx={{marginBottom: '10px'}}>
-                    <p>Hier kannst du die Eigenschaften Filtern. Beispiel: Wenn dein Balkonspeicher unbedingt eine App haben muss, dann aktiviere die Checkbox "App" und es werden nur 
-                    die Balkonspeicher angezeigt, die auch eine App unterstützen. Du kannst so viele Filter nutzen wie du willst.
+                    <p>Hier kannst du die Eigenschaften filtern.</p>
+                    <p>Beispiel: Wenn dein Balkonspeicher unbedingt eine App haben muss, aktiviere 
+                        die Checkbox "App". Dann werden nur Balkonspeicher angezeigt, die eine App unterstützen. Du kannst beliebig viele Filter gleichzeitig nutzen.
                     </p>
                     </Box>
-
-                    <Divider orientation='horizontal' flexItem sx={{color: black}}/>
                     
                         <FormControlLabel
                             control={

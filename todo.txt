@@ -2,7 +2,4 @@
 - links unter Webseite schöner machen
 - links die nicht exestieren anders darstellen
 - Amazon Links
-- minimale Wh anpassen damit das in der Tabelle sichbar wird
-    - eventuell besser zuordnen
-    -defintiv in eine paper einlegen damit das hübscher aussieht
--Logos/Icons einfügen wo es geht
+- Logos/Icons einfügen wo es geht

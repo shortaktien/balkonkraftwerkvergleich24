@@ -9,10 +9,12 @@ import {
     TablePagination, 
     Paper,
     TableSortLabel,
+    Link,
  } from '@mui/material';
 
  import rows from './products.json';
  import TableFilters from './TableFilters';
+ import TableUserSettings from './TableUserSettings';
 
 export default function MaterialUITable() {
     const [page, setPage] = React.useState(0);
@@ -35,6 +37,22 @@ export default function MaterialUITable() {
       bidirektional: false,
       ladeanschluss: false,
   });
+
+  // 🟢 **STATE für Sichtbare Spalten**
+  const [visibleColumns, setVisibleColumns] = useState({
+    name: true,
+    akkukapazitaet: true,
+    maxKapazitaet: true,
+    erweiterbar: true,
+    ladezyklen: true,
+    garantie: true,
+    anzahlMPPT: true,
+    maxEingang: true,
+    maxEingangModule: true,
+    solarErweiterbar: true,
+
+  });
+
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -125,13 +143,15 @@ export default function MaterialUITable() {
   return (
     <div>
             <TableFilters filters={filters} setFilters={setFilters} minAkkukapazitaet={minAkkukapazitaet} setMinAkkukapazitaet={setMinAkkukapazitaet} minEingang={minEingang} setMinEingang={setMinEingang}/>
+            <TableUserSettings visibleColumns={visibleColumns} setVisibleColumns={setVisibleColumns} />
+
     <Paper elevation={5} sx={{ width: '100%', overflow: 'hidden', marginTop: '10px', marginBottom: '20px'}}>
       <TableContainer sx={{ maxHeight: 440, overflowX: 'auto' }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
               
-
+              {visibleColumns.name && (
               <TableCell style={{ width: 150 }} sortDirection={orderBy === 'name' ? order : false}>
                 <TableSortLabel
                   active={orderBy === 'name'}
@@ -141,7 +161,9 @@ export default function MaterialUITable() {
                   Name
                 </TableSortLabel>
               </TableCell>
+              )}
               
+              {visibleColumns.akkukapazitaet && (
               <TableCell style={{ width: 150 }} sortDirection={orderBy === 'akkukapazitaet' ? order : false}>
                 <TableSortLabel
                   active={orderBy === 'akkukapazitaet'}
@@ -151,7 +173,9 @@ export default function MaterialUITable() {
                   Akkukapazität
                 </TableSortLabel>
               </TableCell>
-              
+              )}
+
+              {visibleColumns.maxKapazitaet && (
               <TableCell style={{ width: 150 }} sortDirection={orderBy === 'maxKapazitaet' ? order : false}>
                 <TableSortLabel
                   active={orderBy === 'maxKapazitaet'}
@@ -161,7 +185,9 @@ export default function MaterialUITable() {
                  Max. Kapazität
                 </TableSortLabel>
               </TableCell>
+              )}
 
+              {visibleColumns.erweiterbar && (
               <TableCell style={{ width: 150 }} sortDirection={orderBy === 'erweiterbar' ? order : false}>
                 <TableSortLabel
                   active={orderBy === 'erweiterbar'}
@@ -171,7 +197,9 @@ export default function MaterialUITable() {
                  Erweiterbar
                 </TableSortLabel>
               </TableCell>
+              )}
               
+              {visibleColumns.ladezyklen && (
               <TableCell style={{ width: 150 }} sortDirection={orderBy === 'ladezyklen' ? order : false}>
                 <TableSortLabel
                   active={orderBy === 'ladezyklen'}
@@ -181,44 +209,118 @@ export default function MaterialUITable() {
                  Ladezyklen
                 </TableSortLabel>
               </TableCell>
+              )}
 
+              {visibleColumns.garantie && (
               <TableCell style={{ width: 150 }}>Garantie</TableCell>
+              )}
+              {visibleColumns.anzahlMPPT && (
               <TableCell style={{ width: 150 }}>Anzahl MPPT</TableCell>
+              )}
+              {visibleColumns.maxMC4 && (
               <TableCell style={{ width: 150 }}>Max. MC4</TableCell>
+            )}
+              {visibleColumns.maxEingang && (
               <TableCell style={{ width: 150 }}>Max Eingang</TableCell>
+            )}
+              {visibleColumns.maxEingangModule && (
               <TableCell style={{ width: 150 }}>Max Eingang Module</TableCell>
+            )}
+              {visibleColumns.solarErweiterbar && (
               <TableCell style={{ width: 150 }}>Solar Erweiterbar</TableCell>
+            )}
+              {visibleColumns.mppt1A && (
               <TableCell style={{ width: 150 }}>MPPT 1 Max A</TableCell>
+            )}
+              {visibleColumns.mppt1V && (
               <TableCell style={{ width: 150 }}>MPPT 1 Max V</TableCell>
+            )}
+              {visibleColumns.mppt2A && (
               <TableCell style={{ width: 150 }}>MPPT 2 Max A</TableCell>
+            )}
+              {visibleColumns.mppt2V && (
               <TableCell style={{ width: 150 }}>MPPT 2 Max V</TableCell>
+            )}
+              {visibleColumns.mppt3A && (
               <TableCell style={{ width: 150 }}>MPPT 3 Max A</TableCell>
+            )}
+              {visibleColumns.mppt3V && (
               <TableCell style={{ width: 150 }}>MPPT 3 Max V</TableCell>
+            )}
+              {visibleColumns.mppt4A && (
               <TableCell style={{ width: 150 }}>MPPT 4 Max A</TableCell>
+            )}
+              {visibleColumns.mppt4V && (
               <TableCell style={{ width: 150 }}>MPPT 4 Max V</TableCell>
+            )}
+              {visibleColumns.gewichtAkku && (
               <TableCell style={{ width: 150 }}>Gewicht Akkueinheit</TableCell>
+            )}
+              {visibleColumns.gewichtLaderegler && (
               <TableCell style={{ width: 150 }}>Gewicht Laderegler</TableCell>
+            )}
+              {visibleColumns.akkuLaenge && (
               <TableCell style={{ width: 150 }}>Akkueinheit Länge</TableCell>
+            )}
+              {visibleColumns.akkuBreite && (
               <TableCell style={{ width: 150 }}>Akkueinheit Breite</TableCell>
+            )}
+              {visibleColumns.akkuHoehe && (
               <TableCell style={{ width: 150 }}>Akkueinheit Höhe</TableCell>
+            )}
+              {visibleColumns.ladereglerLaenge && (
               <TableCell style={{ width: 150 }}>Laderegler Länge</TableCell>
+            )}
+              {visibleColumns.ladereglerBreite && (
               <TableCell style={{ width: 150 }}>Laderegler Breite</TableCell>
+            )}
+              {visibleColumns.ladereglerHoehe && (
               <TableCell style={{ width: 150 }}>Laderegler Höhe</TableCell>
+            )}
+              {visibleColumns.bt && (
               <TableCell style={{ width: 150 }}>Bluetooth</TableCell>
+            )}
+              {visibleColumns.wifi && (
               <TableCell style={{ width: 150 }}>WiFi</TableCell>
+            )}
+              {visibleColumns.app && (
               <TableCell style={{ width: 150 }}>App</TableCell>
+              )}
+              {visibleColumns.cloud && (
               <TableCell style={{ width: 150 }}>Cloud</TableCell>
+            )}
+              {visibleColumns.mqttCloud && (
               <TableCell style={{ width: 150 }}>MQTT Cloud</TableCell>
+            )}
+              {visibleColumns.heizung && (
               <TableCell style={{ width: 150 }}>Heizung</TableCell>
+            )}
+              {visibleColumns.ipKlasse && (
               <TableCell style={{ width: 150 }}>IP Klasse</TableCell>
+            )}
+              {visibleColumns.notstrom && (
               <TableCell style={{ width: 150 }}>Notstrom</TableCell>
+            )}
+              {visibleColumns.maxAusgang && (
               <TableCell style={{ width: 150 }}>Max Ausgang</TableCell>
+            )}
+              {visibleColumns.shellyPro && (
               <TableCell style={{ width: 150 }}>Shelly Pro 3 EM</TableCell>
+            )}
+              {visibleColumns.wechselrichter && (
               <TableCell style={{ width: 150 }}>Mit Wechselrichter</TableCell>
+            )}
+              {visibleColumns.bidirektional && (
               <TableCell style={{ width: 150 }}>Bidirektional</TableCell>
+            )}
+              {visibleColumns.ladeanschluss && (
               <TableCell style={{ width: 150 }}>230V Ladeanschluss</TableCell>
+            )}
+              {visibleColumns.ladeanschluss && (
               <TableCell style={{ width: 150 }}>Website</TableCell>
+              )}
               <TableCell style={{ width: 150 }}>Amazon</TableCell>
+            
             </TableRow>
           </TableHead>
 
@@ -228,50 +330,52 @@ export default function MaterialUITable() {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, index) => (
                 <TableRow key={index} tabIndex={-1}>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.akkukapazitaet}</TableCell>
-                  <TableCell>{row.maxKapazitaet}</TableCell>
-                  <TableCell>{row.erweiterbar ? 'Ja' : 'Nein'}</TableCell>
-                  <TableCell>{row.ladezyklen}</TableCell>
-                  <TableCell>{row.garantie}</TableCell>
-                  <TableCell>{row.anzahlMPPT}</TableCell>
-                  <TableCell>{row.maxMC4}</TableCell>
-                  <TableCell>{row.maxEingang}</TableCell>
-                  <TableCell>{row.maxEingangModule}</TableCell>
-                  <TableCell>{row.solarErweiterbar ? 'Ja' : 'Nein'}</TableCell>
-                  <TableCell>{row.mppt1A}</TableCell>
-                  <TableCell>{row.mppt1V}</TableCell>
-                  <TableCell>{row.mppt2A}</TableCell>
-                  <TableCell>{row.mppt2V}</TableCell>
-                  <TableCell>{row.mppt3A}</TableCell>
-                  <TableCell>{row.mppt3V}</TableCell>
-                  <TableCell>{row.mppt4A}</TableCell>
-                  <TableCell>{row.mppt4V}</TableCell>
-                  <TableCell>{row.gewichtAkku}</TableCell>
-                  <TableCell>{row.gewichtLaderegler}</TableCell>
-                  <TableCell>{row.akkuLaenge}</TableCell>
-                  <TableCell>{row.akkuBreite}</TableCell>
-                  <TableCell>{row.akkuHoehe}</TableCell>
-                  <TableCell>{row.ladereglerLaenge}</TableCell>
-                  <TableCell>{row.ladereglerBreite}</TableCell>
-                  <TableCell>{row.ladereglerHoehe}</TableCell>
-                  <TableCell>{row.bt ? 'Ja' : 'Nein'}</TableCell>
-                  <TableCell>{row.wifi ? 'Ja' : 'Nein'}</TableCell>
-                  <TableCell>{row.app ? 'Ja' : 'Nein'}</TableCell>
-                  <TableCell>{row.cloud ? 'Ja' : 'Nein'}</TableCell>
-                  <TableCell>{row.mqttCloud ? 'Ja' : 'Nein'}</TableCell>
-                  <TableCell>{row.heizung ? 'Ja' : 'Nein'}</TableCell>
-                  <TableCell>{row.ipKlasse}</TableCell>
-                  <TableCell>{row.notstrom ? 'Ja' : 'Nein'}</TableCell>
-                  <TableCell>{row.maxAusgang}</TableCell>
-                  <TableCell>{row.shellyPro ? 'Ja' : 'Nein'}</TableCell>
-                  <TableCell>{row.wechselrichter ? 'Ja' : 'Nein'}</TableCell>
-                  <TableCell>{row.bidirektional ? 'Ja' : 'Nein'}</TableCell>
-                  <TableCell>{row.ladeanschluss ? 'Ja' : 'Nein'}</TableCell>
+                  {visibleColumns.name && <TableCell>{row.name}</TableCell>}
+                  {visibleColumns.akkukapazitaet && <TableCell>{row.akkukapazitaet}</TableCell>}
+                  {visibleColumns.maxKapazitaet && <TableCell>{row.maxKapazitaet}</TableCell>}
+                  {visibleColumns.erweiterbar && (<TableCell>{row.erweiterbar ? 'Ja' : 'Nein'}</TableCell>)}
+                  {visibleColumns.ladezyklen && <TableCell>{row.ladezyklen}</TableCell>}
+                  {visibleColumns.garantie && <TableCell>{row.garantie}</TableCell>}
+                  {visibleColumns.anzahlMPPT && <TableCell>{row.anzahlMPPT}</TableCell>}
+                  {visibleColumns.maxMC4 && <TableCell>{row.maxMC4}</TableCell>}
+                  {visibleColumns.maxEingang && <TableCell>{row.maxEingang}</TableCell>}
+                  {visibleColumns.maxEingangModule && <TableCell>{row.maxEingangModule}</TableCell>}
+                  {visibleColumns.solarErweiterbar && (<TableCell>{row.solarErweiterbar ? 'Ja' : 'Nein'}</TableCell>)}
+                  {visibleColumns.mppt1A && <TableCell>{row.mppt1A}</TableCell>}
+                  {visibleColumns.mppt1V && <TableCell>{row.mppt1V}</TableCell>}
+                  {visibleColumns.mppt2A && <TableCell>{row.mppt2A}</TableCell>}
+                  {visibleColumns.mppt2V && <TableCell>{row.mppt2V}</TableCell>}
+                  {visibleColumns.mppt3A && <TableCell>{row.mppt3A}</TableCell>}
+                  {visibleColumns.mppt3V && <TableCell>{row.mppt3V}</TableCell>}
+                  {visibleColumns.mppt4A && <TableCell>{row.mppt4A}</TableCell>}
+                  {visibleColumns.mppt4V && <TableCell>{row.mppt4V}</TableCell>}
+                  {visibleColumns.gewichtAkku && <TableCell>{row.gewichtAkku}</TableCell>}
+                  {visibleColumns.gewichtLaderegler && <TableCell>{row.gewichtLaderegler}</TableCell>}
+                  {visibleColumns.akkuLaenge && <TableCell>{row.akkuLaenge}</TableCell>}
+                  {visibleColumns.akkuBreite && <TableCell>{row.akkuBreite}</TableCell>}
+                  {visibleColumns.akkuHoehe && <TableCell>{row.akkuHoehe}</TableCell>}
+                  {visibleColumns.ladereglerLaenge && <TableCell>{row.ladereglerLaenge}</TableCell>}
+                  {visibleColumns.ladereglerBreite && <TableCell>{row.ladereglerBreite}</TableCell>}
+                  {visibleColumns.ladereglerHoehe && <TableCell>{row.ladereglerHoehe}</TableCell>}
+                  {visibleColumns.bt && (<TableCell>{row.bt ? 'Ja' : 'Nein'}</TableCell>)}
+                  {visibleColumns.wifi && (<TableCell>{row.wifi ? 'Ja' : 'Nein'}</TableCell>)}
+                  {visibleColumns.app && (<TableCell>{row.app ? 'Ja' : 'Nein'}</TableCell>)}
+                  {visibleColumns.cloud && (<TableCell>{row.cloud ? 'Ja' : 'Nein'}</TableCell>)}
+                  {visibleColumns.mqttCloud && (<TableCell>{row.mqttCloud ? 'Ja' : 'Nein'}</TableCell>)}
+                  {visibleColumns.heizung && (<TableCell>{row.heizung ? 'Ja' : 'Nein'}</TableCell>)}
+                  {visibleColumns.ipKlasse && <TableCell>{row.ipKlasse}</TableCell>}
+                  {visibleColumns.notstrom && (<TableCell>{row.notstrom ? 'Ja' : 'Nein'}</TableCell>)}
+                  {visibleColumns.maxAusgang && <TableCell>{row.maxAusgang}</TableCell>}
+                  {visibleColumns.shellyPro && (<TableCell>{row.shellyPro ? 'Ja' : 'Nein'}</TableCell>)}
+                  {visibleColumns.wechselrichter && (<TableCell>{row.wechselrichter ? 'Ja' : 'Nein'}</TableCell>)}
+                  {visibleColumns.bidirektional && (<TableCell>{row.bidirektional ? 'Ja' : 'Nein'}</TableCell>)}
+                  {visibleColumns.ladeanschluss && (<TableCell>{row.ladeanschluss ? 'Ja' : 'Nein'}</TableCell>)}
+                  {visibleColumns.website && (<TableCell>
+                      <Link href={row.website} underline="hover" target="_blank" rel="noopener noreferrer">{'Hersteller Seite'}</Link>
+                  </TableCell>)}
                   <TableCell>
-                      <a href={row.website} target="_blank" rel="noopener noreferrer">Hersteller-Link</a>
+                  <Link href={row.amazon} underline="hover" target="_blank" rel="noopener noreferrer">{'Preis Prüfen'}</Link>
                   </TableCell>
-                  <TableCell>{row.amazon}</TableCell>
                 </TableRow>
               ))}
           </TableBody>

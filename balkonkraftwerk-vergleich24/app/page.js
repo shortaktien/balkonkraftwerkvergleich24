@@ -2,17 +2,19 @@
 
 import styles from "./page.module.css";
 import TableComponent from "./TableComponent";
+import Header from "./Header";
 
 export default function Home() {
   return (
     <div className={styles.page}>
-      <main className={styles.main}>
-        <p>Test</p>
+      <Header />
+        <main className={styles.main}>
+          <p>Test</p>
 
-        
-        <TableComponent />
+          
+          <TableComponent />
 
-      </main>
+        </main>
 
       <footer className={styles.footer}>
         <p>Made by Alexander</p>
