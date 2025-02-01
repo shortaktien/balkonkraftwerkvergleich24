@@ -1,6 +1,9 @@
+//layout.js
+
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Head from "next/head"; // Falls du Head von Next.js nutzen möchtest
+import Providers from "./providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,7 +41,9 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

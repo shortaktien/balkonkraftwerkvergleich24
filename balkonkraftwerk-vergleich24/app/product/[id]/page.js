@@ -1,11 +1,13 @@
 "use client";
 
+import { useContext } from "react";
 import { useParams, useRouter } from "next/navigation";
-import products from "@/app/products.json";
+import { DarkModeContext } from "../../context/DarkModeContext";
+import products from "../../products.json";
+import Header from "../../Header";
 import {
   Box,
   Typography,
-  Link as MuiLink,
   Paper,
   Table,
   TableBody,
@@ -17,27 +19,44 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  ThemeProvider,
+  createTheme,
+  CssBaseline,
+  Container,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Link from "@mui/material/Link";
+
+// Light Theme
+const lightTheme = createTheme({
+  palette: {
+    mode: "light",
+    background: { default: "#F0F8FF", paper: "#ffffff" },
+    text: { primary: "#111111", secondary: "#333333" },
+  },
+});
+
+// Dark Theme
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+    background: { default: "#121212", paper: "#1E1E1E" },
+    text: { primary: "#ffffff", secondary: "#B3B3B3" },
+  },
+});
 
 export default function ProductDetail() {
-  const params = useParams();      // Holt die dynamischen Routen-Parameter
+  const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
+  const params = useParams();
   const router = useRouter();
   const { id } = params;
 
-  // Produkt anhand der ID aus der JSON-Datei finden
   const product = products.find((p) => p.id === id);
-
-  // Falls kein Produkt gefunden wurde → zu eigener 404-Seite leiten oder Meldung anzeigen
   if (!product) {
-    // Beispiel: Navigiere zu einer (statischen) 404-Seite
-    // oder zeige stattdessen ein eigenes "Produkt nicht gefunden" Layout.
     router.push("/404");
     return null;
   }
 
-  // Optional: Mache für jedes Feld ein Label – so kannst du "erweiterbar" → "Erweiterbar" usw.  
-  // Außerdem kannst du booleans (true/false) in "Ja"/"Nein" umwandeln
   const allFields = [
     { key: "akkukapazitaet", label: "Akkukapazität" },
     { key: "maxKapazitaet", label: "Max. Kapazität" },
@@ -83,152 +102,108 @@ export default function ProductDetail() {
   ];
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 2, p: 4 }}>
-      {/* Überschrift */}
-      <Typography variant="h4" fontWeight="bold" gutterBottom>
-        {product.name}
-      </Typography>
-
-      {/* Kurze Übersichtstabelle (z.B. wichtigste Daten) */}
-      <TableContainer component={Paper} elevation={3} sx={{ mb: 2 }}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell
-                colSpan={2}
-                sx={{ backgroundColor: "#f0f8ff", fontWeight: "bold" }}
-              >
-                Wichtigste Daten
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {/* Beispiel: zeig 3 Felder im "Schnellüberblick" */}
-            <TableRow>
-              <TableCell>Akkukapazität</TableCell>
-              <TableCell>{product.akkukapazitaet} Wh</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Garantie</TableCell>
-              <TableCell>{product.garantie} Jahre</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Max. Eingang</TableCell>
-              <TableCell>{product.maxEingang}</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
-
-      {/* Accordion für alle weiteren Felder */}
-      <Accordion sx={{ boxShadow: 3, borderRadius: 2 }}>
-        <AccordionSummary sx={{ boxShadow: 3, borderRadius: 2}} expandIcon={<ExpandMoreIcon />}>
-          <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
-            Alle Eigenschaften anzeigen
+    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <CssBaseline />
+      <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+      <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+          <Typography sx={{ color: "text.primary" }} variant="h4" fontWeight="bold" gutterBottom>
+            {product.name}
           </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <TableContainer component={Paper} elevation={2}>
-            <Table size="small">
+
+          <TableContainer component={Paper} elevation={3} sx={{ backgroundColor: "background.paper" }}>
+            <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell
-                    colSpan={2}
-                    sx={{ backgroundColor: "#fafafa", fontWeight: "bold" }}
-                  >
-                    Technische Daten (Detail)
+                  <TableCell colSpan={2} sx={{ backgroundColor: "background.default", color: "text.primary", fontWeight: "bold" }}>
+                    Wichtigste Daten
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {allFields.map(({ key, label, isBoolean }) => {
-                  const value = product[key];
-                  // Wenn Boolean, dann "Ja" oder "Nein" statt true/false
-                  let displayValue = value;
-                  if (typeof value === "boolean" && isBoolean) {
-                    displayValue = value ? "Ja" : "Nein";
-                  }
-
-                  return (
-                    <TableRow key={key}>
-                      <TableCell>{label}</TableCell>
-                      <TableCell>{displayValue}</TableCell>
-                    </TableRow>
-                  );
-                })}
+                <TableRow>
+                  <TableCell>Akkukapazität</TableCell>
+                  <TableCell>{product.akkukapazitaet} Wh</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Garantie</TableCell>
+                  <TableCell>{product.garantie} Jahre</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Max. Eingang</TableCell>
+                  <TableCell>{product.maxEingang}</TableCell>
+                </TableRow>
               </TableBody>
             </Table>
           </TableContainer>
-        </AccordionDetails>
-      </Accordion>
 
-      <Box>
-        <p>Kurze Produktbeschreibung:</p>
-        <br></br>
-        <p>{product.produktbeschriebung}</p>
-      </Box>
+          <Accordion sx={{ backgroundColor: "background.paper", borderRadius: 2 }}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ backgroundColor: "background.default", borderRadius: 2 }}>
+              <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>Alle Eigenschaften anzeigen</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <TableContainer component={Paper} elevation={2} sx={{ backgroundColor: "background.paper" }}>
+                <Table size="small">
+                  <TableBody>
+                    {allFields.map(({ key, label, isBoolean }) => {
+                      const value = product[key];
+                      let displayValue = value;
+                      if (typeof value === "boolean" && isBoolean) {
+                        displayValue = value ? "Ja" : "Nein";
+                      }
+                      return (
+                        <TableRow key={key}>
+                          <TableCell>{label}</TableCell>
+                          <TableCell>{displayValue}</TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </AccordionDetails>
+          </Accordion>
 
-      {/* Hersteller-Link */}
-      <Box>
-        <Typography variant="body1" gutterBottom>
-          Weitere Infos direkt beim Hersteller:
-        </Typography>
-        <MuiLink href={product.website} target="_blank" rel="noopener noreferrer">
-          {product.website}
-        </MuiLink>
-      </Box>
+          <Box>
+            <Typography sx={{ color: "text.primary" }} variant="body1" gutterBottom>Kurze Produktbeschreibung:</Typography>
+            <Typography variant="body2" sx={{ color: "text.secondary" }}>{product.produktbeschriebung}</Typography>
+          </Box>
 
-      {/* Amazon-Link, falls vorhanden */}
-      {product.amazon && product.amazon !== "-" && (
-        <Box sx={{ textAlign: "center", mt: 2 }}>
-          <Typography variant="body1" gutterBottom>
-            Preis bei Amazon Prüfen:
-          </Typography>
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "#FFD814", // Amazon-Gelb
-              color: "#111", // Dunkle Amazon-Schrift
-              "&:hover": {
-                backgroundColor: "#F7CA00", // Dunkleres Gelb beim Hover
-              },
-              fontWeight: "bold",
-              textTransform: "none",
-              padding: "10px 20px",
-              fontSize: "16px",
-              borderRadius: "8px",
-            }}
-            href={product.amazon}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            🔎 Jetzt Preis prüfen
-          </Button>
+          <Box>
+            <Typography sx={{ color: "text.primary" }} variant="body1" gutterBottom>Weitere Infos direkt beim Hersteller:</Typography>
+            <Link href={product.website} target="_blank" rel="noopener noreferrer" sx={{ color: "primary.light" }}>
+              {product.website}
+            </Link>
+          </Box>
+
+          {product.amazon && product.amazon !== "-" && (
+            <Box sx={{ textAlign: "center", mt: 2 }}>
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: "#FFD814",
+                  color: "#111",
+                  "&:hover": { backgroundColor: "#F7CA00" },
+                  fontWeight: "bold",
+                  padding: "10px 20px",
+                  fontSize: "16px",
+                  borderRadius: "8px",
+                }}
+                href={product.amazon}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                🔎 Jetzt Preis prüfen
+              </Button>
+            </Box>
+          )}
+
+          <Box sx={{ display: "flex", gap: 1 }}>
+            <Button variant="contained" color="primary" onClick={() => history.back()}>Zurück</Button>
+            <Button variant="outlined" onClick={() => window.location.href = `mailto:lfsanja@gmail.com?subject=Bug melden&body=Produkt: ${product.id}`}>Bug melden</Button>
+          </Box>
         </Box>
-      )}
-
-      {/* (Optional) Button „Zurück“ */}
-      <Box sx={{ display: "flex", gap: 1 }}>
-        <Button 
-          variant="contained"
-          color="primary"
-          onClick={() => history.back()}
-        >
-          Zurück
-        </Button>
-        <Button 
-                  variant="outlined"
-                  onClick={() => {
-                    const subject = encodeURIComponent("Bug melden");
-                    const body = encodeURIComponent(
-                      `Produkt: ${product.id} \nBrowser: \nMobile/PC: \nTechnischer Fehler: \nInhaltlicher Fehler: \nSonstiges: \n`
-                    );
-                    window.location.href = `mailto:lfsanja@gmail.com?subject=${subject}&body=${body}`;
-                  }}
-                >
-                  Bug melden
-                </Button>
-      </Box>
-    </Box>
+      </Container>
+    </ThemeProvider>
   );
 }
