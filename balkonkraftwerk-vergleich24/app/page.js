@@ -1,13 +1,11 @@
 "use client";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import styles from "./page.module.css";
 import TableComponent from "./TableComponent";
 import Header from "./Header";
 import Footer from "./Footer";
 import { Box, Typography } from '@mui/material';
 import SolarPowerIcon from "@mui/icons-material/SolarPower";
-
-
 
 export default function Home() {
   

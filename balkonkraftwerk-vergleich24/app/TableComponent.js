@@ -12,6 +12,7 @@ import {
     TableSortLabel,
     Box,
     Button,
+    Stack
  } from '@mui/material';
 
  import rows from './products.json';
@@ -144,21 +145,53 @@ export default function MaterialUITable() {
 
   return (
     <div>
-      <Box sx={{display: 'flex', flexDirection: 'row', gap: '10px'}}>
-        <TableFilters filters={filters} setFilters={setFilters} minAkkukapazitaet={minAkkukapazitaet} setMinAkkukapazitaet={setMinAkkukapazitaet} minEingang={minEingang} setMinEingang={setMinEingang} />
-        <TableUserSettings visibleColumns={visibleColumns} setVisibleColumns={setVisibleColumns} />
-        <Button
-          variant="outlined"
-          onClick={() => {
-            const subject = encodeURIComponent("Bug melden");
-            const body = encodeURIComponent(
-              `Browser: \nMobile/PC: \nTechnischer Fehler: \nInhaltlicher Fehler: \nSonstiges: \n`
-            );
-            window.location.href = `mailto:lfsanja@gmail.com?subject=${subject}&body=${body}`;
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        {/* Erste Zeile: Filter und Einstellungen */}
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 2,
+            alignItems: "center",
+            justifyContent: "space-between",
           }}
         >
-          Bug melden
-        </Button>
+          {/* Container für Filter und Einstellungen*/}
+          <Box sx={{ flexGrow: 1, minWidth: "300px" }}>
+            <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap">
+              <TableFilters
+                filters={filters}
+                setFilters={setFilters}
+                minAkkukapazitaet={minAkkukapazitaet}
+                setMinAkkukapazitaet={setMinAkkukapazitaet}
+                minEingang={minEingang}
+                setMinEingang={setMinEingang}
+              />
+              <TableUserSettings
+                visibleColumns={visibleColumns}
+                setVisibleColumns={setVisibleColumns}
+              />
+            </Stack>
+          </Box>
+
+          {/* Fester Container für den Bug-Melden-Button */}
+          <Box sx={{ flexShrink: 0 }}>
+            <Button
+              variant="outlined"
+              sx={{ minWidth: "150px" }}
+              onClick={() => {
+                const subject = encodeURIComponent("Bug melden");
+                const body = encodeURIComponent(
+                  `Browser: \nMobile/PC: \nTechnischer Fehler: \nInhaltlicher Fehler: \nSonstiges: \n`
+                );
+                window.location.href = `mailto:lfsanja@gmail.com?subject=${subject}&body=${body}`;
+              }}
+            >
+              Bug melden
+            </Button>
+          </Box>
+        </Box>
+        {/* Falls du noch weitere Inhalte hast, können diese hier folgen */}
       </Box>
 
       <Paper elevation={5} sx={{ width: '100%', overflow: 'hidden', marginTop: '10px', marginBottom: '20px'}}>
@@ -176,10 +209,6 @@ export default function MaterialUITable() {
                   >
                     Name
                   </TableSortLabel>
-                  <br />
-                  <Link href={`/produkt/${row.id}`} style={{ textDecoration: "none", color: "inherit", fontWeight: "bold" }}>
-                    {row.name}
-                  </Link>
                 </TableCell>
               )}
                 
@@ -346,21 +375,18 @@ export default function MaterialUITable() {
 
             <TableBody>
               {/* Rendering Rows */}
-              {visibleRows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => (
-                  <TableRow key={index} tabIndex={-1}>
-                    {visibleColumns.name && (
-                      <TableCell style={{ width: 150 }} sortDirection={orderBy === "name" ? order : false}>
-                        <TableSortLabel
-                          active={orderBy === "name"}
-                          direction={orderBy === "name" ? order : "asc"}
-                          onClick={(event) => handleRequestSort(event, "name")}
-                        >
-                          Name
-                        </TableSortLabel>
-                      </TableCell>
-                    )}
+              {visibleRows.map((row, index) => (
+                <TableRow key={index} tabIndex={-1}>
+                  {visibleColumns.name && (
+                    <TableCell>
+                      <Link
+                        href={`/product/${row.id}`}
+                        style={{ textDecoration: "none", color: "inherit", fontWeight: "bold" }}
+                      >
+                        {row.name}
+                      </Link>
+                    </TableCell>
+                  )}        
                     {visibleColumns.akkukapazitaet && <TableCell>{row.akkukapazitaet}</TableCell>}
                     {visibleColumns.maxKapazitaet && <TableCell>{row.maxKapazitaet}</TableCell>}
                     {visibleColumns.erweiterbar && (<TableCell>{row.erweiterbar ? 'Ja' : 'Nein'}</TableCell>)}
@@ -404,7 +430,47 @@ export default function MaterialUITable() {
                         <Link href={row.website} underline="hover" target="_blank" rel="noopener noreferrer">{'Hersteller Seite'}</Link>
                     </TableCell>)}
                     <TableCell>
-                    <Link href={row.amazon} underline="hover" target="_blank" rel="noopener noreferrer">{'Preis Prüfen'}</Link>
+                      {row.amazon && row.amazon !== "-" ? (
+                        <Button
+                          variant="contained"
+                          sx={{
+                            backgroundColor: "#FFD814", // Amazon-Gelb
+                            color: "#111", // Dunkle Amazon-Schrift
+                            "&:hover": {
+                              backgroundColor: "#F7CA00", // Dunkleres Gelb beim Hover
+                            },
+                            fontWeight: "bold",
+                            textTransform: "none",
+                            padding: "8px 16px",
+                            fontSize: "12px",
+                            borderRadius: "8px",
+                            width: "100%",
+                            
+                          }}
+                          href={row.amazon}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          🔎 Preis Prüfen
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="contained"
+                          disabled
+                          sx={{
+                            backgroundColor: "#B0B0B0", // Grauer Button, wenn kein Link vorhanden
+                            color: "#666",
+                            fontWeight: "bold",
+                            textTransform: "none",
+                            padding: "8px 16px",
+                            fontSize: "12px",
+                            borderRadius: "8px",
+                            width: "100%",
+                          }}
+                        >
+                          ❌ Nicht verfügbar
+                        </Button>
+                      )}
                     </TableCell>
                   </TableRow>
                 ))}
@@ -420,6 +486,7 @@ export default function MaterialUITable() {
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
+          labelRowsPerPage="Zeilen pro Seite:"
         />
       </Paper>
     </div>

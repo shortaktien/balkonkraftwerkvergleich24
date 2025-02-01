@@ -7,6 +7,7 @@ import RssFeedIcon from "@mui/icons-material/RssFeed";
 import PodcastsIcon from '@mui/icons-material/Podcasts';
 import ArticleIcon from "@mui/icons-material/Article";
 import InstagramIcon from '@mui/icons-material/Instagram';
+import AndroidIcon from '@mui/icons-material/Android';
 
 export default function Footer() {
   return (
@@ -32,6 +33,12 @@ export default function Footer() {
           </IconButton>
           Podcast
         </Link>
+        <Link href="https://open.spotify.com/show/1NN6Hcc0mqI62yFEoVtZmk" target="_blank" underline="none">
+          <IconButton color="primary">
+            <AndroidIcon  />
+          </IconButton>
+          Android Store
+        </Link>
       </Stack>
 
       <Divider sx={{ my: 2 }} />
@@ -44,7 +51,7 @@ export default function Footer() {
         <IconButton href="https://x.com/shortaktien" target="_blank">
           <TwitterIcon />
         </IconButton>
-        <IconButton href="https://instagram.com/@probablynothing.alex)" target="_blank">
+        <IconButton href="https://instagram.com/probablynothing.alex" target="_blank">
           <InstagramIcon />
         </IconButton>
         <IconButton href="https://www.youtube.com/channel/UCwWv39h0e84XUsNXKqullCw" target="_blank">
