@@ -7,7 +7,7 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { motion } from "framer-motion";
 
-const pages = ["Dummy1", "Dummy2", "Dummy3"];
+const pages = ["Dummy1"];
 
 const SUN_COUNT = 20;
 
@@ -75,7 +75,16 @@ export default function Header({ isDarkMode, toggleDarkMode }) {
 
             {/* Navigation */}
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
+              <Button
+                component="a"
+                href="https://balkon.solar/"
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                sx={{ my: 2, color: "white", display: "block", letterSpacing: "0rem"}}
+              >
+                Balkon.Solar e.V.
+              </Button>
+              {pages.slice(1).map((page) => (
                 <Button key={page} sx={{ my: 2, color: "white", display: "block" }}>
                   {page}
                 </Button>

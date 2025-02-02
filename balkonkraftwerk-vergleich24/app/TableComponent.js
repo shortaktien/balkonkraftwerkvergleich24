@@ -195,7 +195,7 @@ export default function MaterialUITable() {
       </Box>
 
       <Paper elevation={5} sx={{ width: '100%', overflow: 'hidden', marginTop: '10px', marginBottom: '20px'}}>
-        <TableContainer sx={{ maxHeight: 440, overflowX: 'auto' }}>
+        <TableContainer sx={{ maxHeight: 680, overflowX: 'auto' }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
@@ -451,7 +451,7 @@ export default function MaterialUITable() {
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          🔎 Preis Prüfen
+                          🔎 Preis Prüfen *
                         </Button>
                       ) : (
                         <Button

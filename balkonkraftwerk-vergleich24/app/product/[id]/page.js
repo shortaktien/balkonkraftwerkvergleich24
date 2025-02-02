@@ -202,6 +202,14 @@ export default function ProductDetail() {
             <Button variant="contained" color="primary" onClick={() => history.back()}>Zurück</Button>
             <Button variant="outlined" onClick={() => window.location.href = `mailto:lfsanja@gmail.com?subject=Bug melden&body=Produkt: ${product.id}`}>Bug melden</Button>
           </Box>
+            <Typography variant="body2" sx={{ fontStyle: "italic" }}>Dies ist ein gemeinschaftsbasiertes Projekt; 
+              wir können daher keine Haftung für die Vollständigkeit oder Richtigkeit der angezeigten Daten übernehmen. 
+              Sollten Ihnen fehlerhafte Informationen auffallen, nutzen Sie bitte den „BUG MELDEN“-Button, 
+              damit wir die Datenlage entsprechend korrigieren können.</Typography>
+            <Typography variant="body2" sx={{ fontStyle: "italic" }}>* Links zu Amazon sind Ref-Links, 
+              die ausschließlich dem Erhalt dieses Projekts dienen. Für den Nutzer entstehen keine zusätzlichen 
+              Kosten.
+            </Typography>
         </Box>
       </Container>
     </ThemeProvider>

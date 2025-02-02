@@ -1,2 +1,7 @@
 @TODO
--sonnen überarbeiten
+
+- API zu Amazon eventuell für jede Seite nutzen für weitere Informationen
+- unter der Tabelle Texte einfügen -> mehr Inahlt, mit SEO testen für Suchmaschinen
+- Favicon erstellen?!
+- berechnung ob eine batterie sich lohhnt angucken?
+    - implementieren 

@@ -33,7 +33,7 @@ export default function Footer() {
           </IconButton>
           Podcast
         </Link>
-        <Link href="https://open.spotify.com/show/1NN6Hcc0mqI62yFEoVtZmk" target="_blank" underline="none">
+        <Link href="https://play.google.com/store/apps/dev?id=7286801966082095456&hl=de" target="_blank" underline="none">
           <IconButton color="primary">
             <AndroidIcon  />
           </IconButton>
