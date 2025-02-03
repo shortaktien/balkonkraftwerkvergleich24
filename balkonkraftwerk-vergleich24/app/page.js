@@ -11,6 +11,8 @@ import SolarPowerIcon from "@mui/icons-material/SolarPower";
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
+
+
 // 🎨 **Light Mode Theme**
 const lightTheme = createTheme({
   palette: {
@@ -77,7 +79,15 @@ export default function Home() {
                 mb: 4,
               }}
             >
-              <Typography variant="h4" fontWeight="bold" gutterBottom>
+              <Typography
+                variant="h3"
+                fontWeight="bold"
+                gutterBottom
+                sx={{
+                  textAlign: "center",
+                  mb: 2,
+                }}
+              >
                 <SolarPowerIcon fontSize="large" sx={{ verticalAlign: "middle", mr: 1 }} />
                 Finde den perfekten Balkonkraftwerk Speicher!
               </Typography>
@@ -87,13 +97,21 @@ export default function Home() {
                 <strong> Solarenergie effizient zu speichern</strong>, bist dir aber unsicher, welcher der richtige für dich ist?
               </Typography>
 
-              <Typography variant="body1" sx={{ maxWidth: "600px", mx: "auto", mb: 3, color: "text.secondary" }}>
-                Mit Balkonspeicher-Vergleich findest du schnell und einfach den passenden Batteriespeicher für dein  
-                <strong> Balkonkraftwerk</strong>. Vergleiche technische Daten, Kapazitäten und Funktionen – und finde die optimale Lösung 
-                für deine Energieunabhängigkeit!
+              <Typography
+                variant="body1"
+                sx={{
+                  maxWidth: "600px",
+                  mx: "auto",
+                  mb: 3,
+                  color: "text.secondary",
+                  fontSize: "1.1rem", // Etwas größer für bessere Lesbarkeit
+                }}
+              >
+                Mit Balkonspeicher-Vergleich findest du schnell und einfach den passenden 
+                <strong>Batteriespeicher</strong> für dein Balkonkraftwerk!
               </Typography>
 
-              <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>
+              <Typography variant="h4" fontWeight="bold" sx={{ mb: 2 }}>
                 🔍 So funktioniert's:
               </Typography>
 

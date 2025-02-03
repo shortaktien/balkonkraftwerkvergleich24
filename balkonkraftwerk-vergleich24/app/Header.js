@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { AppBar, Box, Toolbar, IconButton, Typography, Container, Button, Link, Drawer, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import { AppBar, Box, Toolbar, IconButton, Typography, Container, Button, Link, Drawer, List, ListItem, ListItemButton, ListItemText, Tooltip } from "@mui/material";
 import SolarPowerIcon from "@mui/icons-material/SolarPower";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
@@ -65,23 +65,23 @@ export default function Header({ isDarkMode, toggleDarkMode }) {
           <Toolbar disableGutters>
             <SolarPowerIcon sx={{ display: { xs: "none", md: "flex" }, mr: 2 }} />
             <Link href="/" passHref>
-              <Typography
-                variant="h6"
-                noWrap
-                component="a"
-                sx={{
-                  mr: 2,
-                  display: { xs: "none", md: "flex" },
-                  fontFamily: "monospace",
-                  fontWeight: 900,
-                  letterSpacing: ".05rem",
-                  color: "white",
-                  textDecoration: "none",
-                }}
-              >
-                Vergleich Balkonkraftwerk Speicher
-              </Typography>
+              <a style={{ textDecoration: "none", color: "white" }}>
+                <Typography
+                  variant="h6"
+                  noWrap
+                  sx={{
+                    mr: 2,
+                    display: { xs: "none", md: "flex" },
+                    fontFamily: "monospace",
+                    fontWeight: 900,
+                    letterSpacing: ".05rem",
+                  }}
+                >
+                  Vergleich Balkonkraftwerk Speicher
+                </Typography>
+              </a>
             </Link>
+
 
             {/* 🌟 Hamburger-Menü für kleine Bildschirme 🌟 */}
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" }, justifyContent: "flex-end" }}>
@@ -107,9 +107,11 @@ export default function Header({ isDarkMode, toggleDarkMode }) {
             </Box>
 
             {/* 🌑 Dark Mode Toggle Button 🌞 */}
-            <IconButton sx={{ ml: 1 }} onClick={toggleDarkMode} color="inherit">
-              {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
-            </IconButton>
+            <Tooltip title="Helles/Dunkles ändern">
+              <IconButton sx={{ ml: 1 }} onClick={toggleDarkMode} color="inherit">
+                {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+              </IconButton>
+            </Tooltip>
           </Toolbar>
         </Container>
       </AppBar>

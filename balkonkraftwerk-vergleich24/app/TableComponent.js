@@ -177,7 +177,7 @@ export default function MaterialUITable() {
           <Box sx={{ flexShrink: 0 }}>
             <Button
               variant="outlined"
-              sx={{ minWidth: "150px" }}
+              sx={{ minWidth: "150px", backgroundColor: "#eb5656", color: "black" }}
               onClick={() => {
                 const subject = encodeURIComponent("Bug melden");
                 const body = encodeURIComponent(

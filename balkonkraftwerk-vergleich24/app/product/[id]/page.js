@@ -201,7 +201,7 @@ export default function ProductDetail() {
 
           <Box sx={{ display: "flex", gap: 1 }}>
             <Button variant="contained" color="primary" onClick={() => history.back()}>Zurück</Button>
-            <Button variant="outlined" onClick={() => window.location.href = `mailto:lfsanja@gmail.com?subject=Bug melden&body=Produkt: ${product.id}`}>Bug melden</Button>
+            <Button sx={{backgroundColor: "#eb5656", color: "black"}} variant="outlined" onClick={() => window.location.href = `mailto:lfsanja@gmail.com?subject=Bug melden&body=Produkt: ${product.id}`}>Bug melden</Button>
           </Box>
             <Typography variant="body2" sx={{ fontStyle: "italic" }}>Dies ist ein gemeinschaftsbasiertes Projekt; 
               wir können daher keine Haftung für die Vollständigkeit oder Richtigkeit der angezeigten Daten übernehmen. 
