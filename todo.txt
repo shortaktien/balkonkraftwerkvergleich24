@@ -5,3 +5,6 @@
 - Favicon erstellen?!
 - berechnung ob eine batterie sich lohhnt angucken?
     - implementieren 
+
+
+    -> https://blog.bitlager.de/files/balkonkraftwerk-speicher-vergleich/balkonkraftwerk-speicher-vergleich-2025-one-pager.pdf

@@ -17,6 +17,10 @@ export async function GET() {
          "marstek-jupiter-c",
          "marstek-b2500-d",
          "hoymiles-ms-a2",
+         "sunlit-bk-215",
+         "bigblue-powerfree-h1",
+         "xoro-solar-sps-1024",
+         "xoro-solar-sps-2155",
         ]; // Hier kannst du deine echten Produkt-IDs laden
   
     // Erstelle die URLs
