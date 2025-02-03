@@ -110,9 +110,8 @@ export default function MaterialUITable() {
       if (filters.heizung && !row.heizung) showRow = false;
       if (filters.notstrom && !row.notstrom) showRow = false;
       if (filters.shellyPro && !row.shellyPro) showRow = false;
+      if (filters.homeassistent && !row.homeassistent) showRow = false;
       if (filters.wechselrichter && !row.wechselrichter) showRow = false;
-      if (filters.bidirektional && !row.bidirektional) showRow = false;
-      if (filters.ladeanschluss && !row.ladeanschluss) showRow = false;
       
       // Akkukapazität filtern
       const minAkkukapazitaetValue = parseInt(minAkkukapazitaet, 10); // Eingabe des Users umwandeln
@@ -356,6 +355,9 @@ export default function MaterialUITable() {
                 {visibleColumns.shellyPro && (
                 <TableCell style={{ width: 150 }}>Shelly Pro 3 EM</TableCell>
               )}
+              {visibleColumns.homeassistent && (
+                <TableCell style={{ width: 150 }}>Home Assistent</TableCell>
+              )}
                 {visibleColumns.wechselrichter && (
                 <TableCell style={{ width: 150 }}>Mit Wechselrichter</TableCell>
               )}
@@ -423,6 +425,7 @@ export default function MaterialUITable() {
                     {visibleColumns.notstrom && (<TableCell>{row.notstrom ? 'Ja' : 'Nein'}</TableCell>)}
                     {visibleColumns.maxAusgang && <TableCell>{row.maxAusgang}</TableCell>}
                     {visibleColumns.shellyPro && (<TableCell>{row.shellyPro ? 'Ja' : 'Nein'}</TableCell>)}
+                    {visibleColumns.homeassistent && (<TableCell>{row.homeassistent ? 'Ja' : 'Nein'}</TableCell>)}
                     {visibleColumns.wechselrichter && (<TableCell>{row.wechselrichter ? 'Ja' : 'Nein'}</TableCell>)}
                     {visibleColumns.bidirektional && (<TableCell>{row.bidirektional ? 'Ja' : 'Nein'}</TableCell>)}
                     {visibleColumns.ladeanschluss && (<TableCell>{row.ladeanschluss ? 'Ja' : 'Nein'}</TableCell>)}

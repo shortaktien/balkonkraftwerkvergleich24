@@ -170,6 +170,18 @@ export default function TableFilters({ filters, setFilters, minAkkukapazitaet, s
                         <FormControlLabel
                             control={
                                 <Checkbox
+                                    name="homeassistent"
+                                    checked={filters.homeassistent}
+                                    onChange={handleCheckboxChange}
+                                    inputProps={{ 'aria-label': 'Home Assistent' }}
+                                    sx={{ color: blue[800] }}
+                                />
+                            }
+                            label="Home Assistent"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
                                     name="wechselrichter"
                                     checked={filters.wechselrichter}
                                     onChange={handleCheckboxChange}

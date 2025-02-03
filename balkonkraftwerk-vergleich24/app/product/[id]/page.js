@@ -95,6 +95,7 @@ export default function ProductDetail() {
     { key: "notstrom", label: "Notstrom", isBoolean: true },
     { key: "maxAusgang", label: "Max. Ausgang" },
     { key: "shellyPro", label: "Shelly Pro 3 EM", isBoolean: true },
+    { key: "homeassistent", label: "Home Assistent", isBoolean: true },
     { key: "wechselrichter", label: "Mit Wechselrichter", isBoolean: true },
     { key: "bidirektional", label: "Bidirektional", isBoolean: true },
     { key: "ladeanschluss", label: "230V Ladeanschluss", isBoolean: true },

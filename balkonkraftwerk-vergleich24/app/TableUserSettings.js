@@ -48,6 +48,7 @@ const columnOptions = {
   notstrom: "Notstrom",
   maxAusgang: "Max. Ausgang (W)",
   shellyPro: "Shelly Pro 3EM",
+  homeassistent: "Home Assistent",
   wechselrichter: "Wechselrichter integriert",
   bidirektional: "Bidirektional",
   ladeanschluss: "230V Ladeanschluss",
