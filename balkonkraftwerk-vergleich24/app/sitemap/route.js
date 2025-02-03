@@ -21,6 +21,10 @@ export async function GET() {
          "bigblue-powerfree-h1",
          "xoro-solar-sps-1024",
          "xoro-solar-sps-2155",
+         "vitapower-vt1000",
+         "zendure-ab2000",
+         "zendure-ab2000s",
+         "solmate-maxxicharge-1-5",
         ]; // Hier kannst du deine echten Produkt-IDs laden
   
     // Erstelle die URLs
