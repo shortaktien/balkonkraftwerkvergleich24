@@ -572,7 +572,7 @@
     "ladeanschluss": false,
     "homeassistent":true,
     "website": "https://marstek.de/products/marstek-jupiter-all-in-one-balkonkraftwerk-mit-speicher",
-    "amazon": "https://amzn.to/3CLxOgC",
+    "amazon": "https://amzn.to/4hj6Ego",
     "produktbeschriebung": "Der Marstek JUPITER-C ist eine All-in-One-Lösung mit 2560 Wh LiFePO4-Batterie, integriertem Wechselrichter und vier MPPT-Trackern. Er liefert bis zu 800 W AC-Ausgangsleistung bei einer hohen Batterietiefe (DoD) von 90%. Die Gesamteffizienz für die Batterieversorgung liegt bei über 96,5%. Dank IP65-Schutz, breitem Betriebstemperaturbereich und natürlicher Konvektionskühlung eignet er sich für vielfältige Einsatzbereiche. Mit 34 kg (±0,5 kg) und kompakten Maßen (265×417×228 mm) ist er zudem gut transportierbar. Unterstützt werden WLAN, Bluetooth, USB-A und RS485."
   },
   {
@@ -812,7 +812,7 @@
     "ladeanschluss": false,
     "homeassistent":false,
     "website": "https://www.xoro.de/produkte/details/xoro-solar-sps-1024-wh/",
-    "amazon": "-",
+    "amazon": "https://amzn.to/40Zhgeu",
     "produktbeschriebung": "Das XORO SOLAR SPS 1024 Wh ist ein leistungsstarker und kompakter Balkonkraftwerkspeicher, der eine zuverlässige Energiespeicherung für Photovoltaikanlagen bietet. Mit einer Kapazität von 1024 Wh ermöglicht er eine effiziente Nutzung von Solarstrom, um den Eigenverbrauch zu maximieren. Die moderne Lithium-Eisenphosphat-Technologie (LiFePO4) sorgt für eine lange Lebensdauer und hohe Sicherheit. Dank der einfachen Installation und smarten Steuerungslösungen lässt sich das System problemlos in bestehende Solaranlagen integrieren. Perfekt für Haushalte, die ihre Stromkosten senken und nachhaltige Energie effizient nutzen möchten."
   },
   {
@@ -860,12 +860,12 @@
     "ladeanschluss": false,
     "homeassistent":false,
     "website": "https://www.xoro.de/produkte/details/xoro-solar-sps-2155/",
-    "amazon": "-",
+    "amazon": "https://amzn.to/40ZhjXI",
     "produktbeschriebung": "Das XORO SOLAR SPS 2155 ist ein leistungsstarker Balkonkraftwerkspeicher mit einer Kapazität von 2155 Wh, der eine effiziente Nutzung von Solarstrom ermöglicht. Ausgestattet mit moderner Lithium-Eisenphosphat-Technologie (LiFePO4) bietet er eine lange Lebensdauer und hohe Sicherheit. Der Speicher optimiert den Eigenverbrauch von Solarenergie und reduziert die Abhängigkeit vom Stromnetz. Dank seiner kompakten Bauweise und einfachen Integration ist er ideal für Balkonkraftwerke und kleinere Photovoltaikanlagen. Perfekt für alle, die nachhaltige Energie effizient nutzen und ihre Stromkosten senken möchten."
   },
   {
     "id": "vitapower-vt1000",
-    "name": "VitaPower VT1000",
+    "name": "AlphaESS VitaPower 1000",
     "akkukapazitaet": 1024,
     "maxKapazitaet": 1024,
     "erweiterbar": false,
@@ -907,8 +907,8 @@
     "bidirektional": false,
     "ladeanschluss": false,
     "homeassistent": true,
-    "website": "https://www.vitapower.com/vt1000",
-    "amazon": "https://amzn.to/beispielVT1000",
+    "website": "https://store.ostrom.de/products/alphaess-vitapower-balkonkraftwerk-speicher-2-6-kwh",
+    "amazon": "-",
     "produktbeschriebung": "Der VitaPower VT1000 ist ein kompakter Balkonkraftwerkspeicher mit einer Akkukapazität von 1024 Wh. Er bietet zwei MPPT-Tracker und eine maximale Solareingangsleistung von ca. 1200W. Mit robusten Bauteilen, IP65-Schutz und einfacher Integration eignet sich das System optimal für den privaten Einsatz."
   },
   {
@@ -955,8 +955,8 @@
     "bidirektional": false,
     "ladeanschluss": false,
     "homeassistent": true,
-    "website": "https://www.zendure.de/ab2000",
-    "amazon": "https://amzn.to/beispielAB2000",
+    "website": "https://www.zendure.de/products/solarflow-hyper-balkonkraftwerk?variant=51973141725533",
+    "amazon": "https://amzn.to/40XNDKq",
     "produktbeschriebung": "Der Zendure AB2000 überzeugt mit einer Akkukapazität von 1920 Wh, hoher Langlebigkeit und moderner Konnektivität. Mit zwei MPPT-Trackern und einem robusten Design ist dieser Speicher ideal für den Eigenverbrauch in Balkonkraftwerken geeignet."
   },
   {
@@ -1004,7 +1004,7 @@
     "ladeanschluss": false,
     "homeassistent": true,
     "website": "https://www.zendure.de/ab2000s",
-    "amazon": "https://amzn.to/beispielAB2000S",
+    "amazon": "https://amzn.to/3CCJORI",
     "produktbeschriebung": "Der Zendure AB2000S bietet vergleichbare Leistungsdaten wie das AB2000, setzt aber zusätzliche Akzente im Design und der Konnektivität. Mit 1920 Wh Akkukapazität und zwei MPPT-Trackern ist er eine ideale Lösung für moderne Balkonkraftwerke."
   },
   {
@@ -1051,8 +1051,8 @@
     "bidirektional": false,
     "ladeanschluss": false,
     "homeassistent": false,
-    "website": "https://www.solmate.com/maxxicharge1.5",
-    "amazon": "https://amzn.to/beispielMaxxicharge1.5",
+    "website": "-",
+    "amazon": "-",
     "produktbeschriebung": "Der Solmate Maxxicharge 1.5 ist ein innovativer Speicher mit einer Nennkapazität von 1536 Wh. Dank kompakter Bauweise und einfacher Erweiterungsmöglichkeiten eignet sich der Speicher ideal für Balkonkraftwerke, bei denen Effizienz und Zuverlässigkeit im Vordergrund stehen."
   }
 ]
