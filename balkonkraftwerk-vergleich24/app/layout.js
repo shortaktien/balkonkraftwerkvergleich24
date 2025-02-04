@@ -118,7 +118,7 @@ export default function RootLayout({ children }) {
         <Providers>{children}</Providers>
 
         {/* ✅ Lazy-Loading für nicht-kritische Skripte */}
-        <Script src="/js/lazy-script.js" strategy="lazyOnload" />
+        
       </body>
     </html>
   );

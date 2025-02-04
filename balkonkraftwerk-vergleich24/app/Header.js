@@ -1,12 +1,14 @@
 "use client";
 
 import * as React from "react";
-import { AppBar, Box, Toolbar, IconButton, Typography, Container, Button, Link, Drawer, List, ListItem, ListItemButton, ListItemText, Tooltip } from "@mui/material";
+import { useEffect, useState } from "react";
+import { AppBar, Box, Toolbar, IconButton, Typography, Container, Button, Drawer, List, ListItem, ListItemButton, ListItemText, Tooltip, Divider } from "@mui/material";
 import SolarPowerIcon from "@mui/icons-material/SolarPower";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import MenuIcon from "@mui/icons-material/Menu";
 import { motion } from "framer-motion";
+import Link from "@mui/material/Link";
 
 const pages = [
   { name: "Balkon.Solar e.V.", url: "https://balkon.solar/" },
@@ -16,36 +18,42 @@ const pages = [
 const SUN_COUNT = 20;
 
 function RainEffect() {
+  const [suns, setSuns] = useState([]);
+
+  useEffect(() => {
+    const generatedSuns = Array.from({ length: SUN_COUNT }).map(() => ({
+      startX: Math.random() * 100, // Zufällige X-Position
+      delay: Math.random() * 3, // Zufällige Verzögerung
+    }));
+    setSuns(generatedSuns);
+  }, []); // Wird nur einmal generiert, bleibt stabil!
+
   return (
     <>
-      {Array.from({ length: SUN_COUNT }).map((_, index) => {
-        const startX = Math.random() * 100;
-        const delay = Math.random() * 2;
-        return (
-          <motion.div
-            key={index}
-            initial={{ x: `${startX}vw`, y: "-10vh", opacity: 0.5, rotate: 0 }}
-            animate={{
-              x: `${startX + 10}vw`,
-              y: "100vh",
-              opacity: 0,
-              rotate: 45,
-            }}
-            transition={{
-              duration: 10 + Math.random() * 2,
-              delay: delay,
-              repeat: Infinity,
-            }}
-            style={{
-              position: "absolute",
-              fontSize: "2rem",
-              color: "rgba(255, 204, 0, 0.8)",
-            }}
-          >
-            🌞
-          </motion.div>
-        );
-      })}
+      {suns.map((sun, index) => (
+        <motion.div
+          key={index}
+          initial={{ x: `${sun.startX}vw`, y: "-10vh", opacity: 0.5, rotate: 0 }}
+          animate={{
+            x: `${sun.startX + 10}vw`,
+            y: "50vh",
+            opacity: 0,
+            rotate: 45,
+          }}
+          transition={{
+            duration: 10 + Math.random() * 2, // Zufällige Dauer
+            delay: sun.delay, // Zufällige Verzögerung
+            repeat: Infinity,
+          }}
+          style={{
+            position: "absolute",
+            fontSize: "2rem",
+            color: "rgba(255, 204, 0, 0.8)",
+          }}
+        >
+          🌞
+        </motion.div>
+      ))}
     </>
   );
 }
@@ -64,23 +72,13 @@ export default function Header({ isDarkMode, toggleDarkMode }) {
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <SolarPowerIcon sx={{ display: { xs: "none", md: "flex" }, mr: 2 }} />
-            <Link href="/" passHref>
-              <a style={{ textDecoration: "none", color: "white" }}>
-                <Typography
-                  variant="h6"
-                  noWrap
-                  sx={{
-                    mr: 2,
-                    display: { xs: "none", md: "flex" },
-                    fontFamily: "monospace",
-                    fontWeight: 900,
-                    letterSpacing: ".05rem",
-                  }}
-                >
+              <Link href="/" underline="none" color="inherit">
+                <Typography variant="h6" noWrap>
                   Vergleich Balkonkraftwerk Speicher
                 </Typography>
-              </a>
-            </Link>
+              </Link>
+            
+            <Divider orientation="vertical" variant="middle" flexItem sx={{ marginLeft: "5px", backgroundColor: "white"}}/>
 
 
             {/* 🌟 Hamburger-Menü für kleine Bildschirme 🌟 */}
