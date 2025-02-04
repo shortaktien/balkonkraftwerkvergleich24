@@ -85,9 +85,11 @@ export default function Header({ isDarkMode, toggleDarkMode }) {
 
             {/* 🌟 Hamburger-Menü für kleine Bildschirme 🌟 */}
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" }, justifyContent: "flex-end" }}>
-              <IconButton color="inherit" onClick={handleDrawerToggle}>
-                <MenuIcon />
-              </IconButton>
+              <Tooltip title="Menü">
+                <IconButton color="inherit" onClick={handleDrawerToggle} aria-label="Menü">
+                  <MenuIcon />
+                </IconButton>
+              </Tooltip>
             </Box>
 
             {/* 🌍 Navigation für große Bildschirme 🌍 */}
@@ -117,6 +119,7 @@ export default function Header({ isDarkMode, toggleDarkMode }) {
       </AppBar>
 
       {/* 📌 Drawer für mobile Ansicht 📌 */}
+      
       <Drawer anchor="left" open={mobileOpen} onClose={handleDrawerToggle}>
         <List sx={{ width: 250 }}>
           {pages.map((page) => (

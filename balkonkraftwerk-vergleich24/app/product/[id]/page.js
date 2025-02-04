@@ -1,9 +1,11 @@
+//app/product/[id]/page.js
 "use client";
 
-import { useContext } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useContext, useEffect, useState } from "react";
+import { useParams} from "next/navigation";
 import { DarkModeContext } from "../../context/DarkModeContext";
-import products from "../../products.json";
+import { getProduct, ProductJsonLd} from "./ProductData";
+import Head from "next/head";
 import Header from "../../Header";
 import {
   Box,
@@ -48,14 +50,29 @@ const darkTheme = createTheme({
 export default function ProductDetail() {
   const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
   const params = useParams();
-  const router = useRouter();
   const { id } = params;
+  const [product, setProduct] = useState(null);
 
-  const product = products.find((p) => p.id === id);
+  //const product = products.find((p) => p.id === id);
+
+  // Produkt laden
+  useEffect(() => {
+    async function fetchProduct() {
+      const fetchedProduct = await getProduct(id);
+      setProduct(fetchedProduct);
+    }
+    fetchProduct();
+  }, [id]);
+
   if (!product) {
-    router.push("/404");
-    return null;
+    return (
+      <Container>
+        <Typography variant="h5">Produkt nicht gefunden</Typography>
+      </Container>
+    );
   }
+
+   
 
   const allFields = [
     { key: "akkukapazitaet", label: "Akkukapazität" },
@@ -103,6 +120,11 @@ export default function ProductDetail() {
   ];
 
   return (
+    <>
+       <Head>
+        <title>{product.name} | Balkonspeicher24</title>
+      </Head>
+      <ProductJsonLd id={id} />
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <CssBaseline />
       <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
@@ -211,8 +233,11 @@ export default function ProductDetail() {
               die ausschließlich dem Erhalt dieses Projekts dienen. Für den Nutzer entstehen keine zusätzlichen 
               Kosten.
             </Typography>
+
+
         </Box>
       </Container>
     </ThemeProvider>
+    </>
   );
 }

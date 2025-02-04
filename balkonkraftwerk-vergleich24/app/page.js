@@ -1,3 +1,4 @@
+//app/page.js
 "use client";
 
 import { useContext, useState, useEffect } from "react";
@@ -10,7 +11,9 @@ import { Box, Typography, Container, Paper, Collapse, IconButton, Link } from "@
 import SolarPowerIcon from "@mui/icons-material/SolarPower";
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Image from "next/image";
 
+<Image src="/solar-icon.png" alt="Solar Icon" width={40} height={40} />
 
 
 // 🎨 **Light Mode Theme**
@@ -48,9 +51,6 @@ export default function Home() {
   const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
   const [open, setOpen] = useState(false);
 
-  // Falls du trotzdem local state für isDarkMode haben möchtest (optional), 
-  // solltest du diesen nicht mit dem Context vermischen. Der Context steuert bereits den Zustand.
-  // Daher entfernen wir hier eine eigene useState()-Definition für Dark Mode.
 
   // Hintergrundfarbe setzen, wenn Theme gewechselt wird
   useEffect(() => {
@@ -67,7 +67,7 @@ export default function Home() {
         <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
 
         <main className={styles.main}>
-          <Container maxWidth="800px">
+          <Container maxWidth="bg" sx={{ maxWidth: "1300px" }}>
             <Box
               sx={{
                 textAlign: "center",
@@ -84,11 +84,10 @@ export default function Home() {
                 fontWeight="bold"
                 gutterBottom
                 sx={{
-                  textAlign: "center",
                   mb: 2,
                 }}
               >
-                <SolarPowerIcon fontSize="large" sx={{ verticalAlign: "middle", mr: 1 }} />
+                <SolarPowerIcon fontSize="inherit" sx={{ verticalAlign: "middle", mr: 1 }} />
                 Finde den perfekten Balkonkraftwerk Speicher!
               </Typography>
 
@@ -140,7 +139,7 @@ export default function Home() {
             <Paper sx={{ p: 4, boxShadow: 3 }}>
               <Typography variant="h5" gutterBottom onClick={() => setOpen(!open)}>
                 Recht auf Smart Meter: Fortschritt oder Kostenfalle?
-                <IconButton size="small" onClick={() => setOpen(!open)}>
+                <IconButton size="small" onClick={() => setOpen(!open)} aria-label="Artikel komplett anzeigen">
                   <ExpandMoreIcon />
                 </IconButton>
               </Typography>
