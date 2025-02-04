@@ -1,10 +1,10 @@
 @TODO
 
 - API zu Amazon eventuell für jede Seite nutzen für weitere Informationen
-- unter der Tabelle Texte einfügen -> mehr Inahlt, mit SEO testen für Suchmaschinen
 - Favicon erstellen?!
 - berechnung ob eine batterie sich lohhnt angucken?
     - implementieren 
-
+- Screenreader bei texten und header menü
+- Sortierung Garantie + MPPT
 
     -> https://blog.bitlager.de/files/balkonkraftwerk-speicher-vergleich/balkonkraftwerk-speicher-vergleich-2025-one-pager.pdf
