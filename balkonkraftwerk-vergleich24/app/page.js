@@ -12,6 +12,9 @@ import SolarPowerIcon from "@mui/icons-material/SolarPower";
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Image from "next/image";
+import { generateHomeJsonLd } from "./utils/structuredData";
+import Head from "next/head";
+import Script from "next/script";
 
 <Image src="/solar-icon.png" alt="Solar Icon" width={40} height={40} />
 
@@ -60,6 +63,16 @@ export default function Home() {
   }, [isDarkMode]);
 
   return (
+    <>
+    <Head>
+      <Script
+        id="structured-data-home"
+        type="application/ld+json"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(generateHomeJsonLd()) }}
+      />
+    </Head>
+
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <CssBaseline />
       <div className={styles.page}>
@@ -190,5 +203,6 @@ export default function Home() {
         </main>
       </div>
     </ThemeProvider>
+    </>
   );
 }
