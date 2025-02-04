@@ -12,7 +12,7 @@ import SolarPowerIcon from "@mui/icons-material/SolarPower";
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Image from "next/image";
-import { generateHomeJsonLd } from "./utils/structuredData";
+import { HomeJsonLd } from "./utils/homeStructuredData";
 import Head from "next/head";
 import Script from "next/script";
 
@@ -65,12 +65,7 @@ export default function Home() {
   return (
     <>
     <Head>
-      <Script
-        id="structured-data-home"
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(generateHomeJsonLd()) }}
-      />
+      <HomeJsonLd />
     </Head>
 
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
