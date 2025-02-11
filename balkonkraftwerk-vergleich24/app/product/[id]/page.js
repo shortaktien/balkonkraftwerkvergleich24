@@ -193,6 +193,34 @@ export default function ProductDetail() {
           </Box>
 
           <Box>
+            <Typography variant="body2" sx={{ color: "text.secondary" }}>{product.produktbeschriebung2}</Typography>
+          </Box>
+
+          <Box>
+            <Typography variant="body2" sx={{ color: "text.secondary" }}>{product.produktbeschriebung3}</Typography>
+          </Box>
+
+          <Box>
+            <Typography variant="body2" sx={{ color: "text.secondary" }}>{product.produktbeschriebung4}</Typography>
+          </Box>
+
+          <Box>
+            <Typography variant="body2" sx={{ color: "text.secondary" }}>{product.produktbeschriebung5}</Typography>
+          </Box>
+
+          <Box>
+            <Typography variant="body2" sx={{ color: "text.secondary" }}>{product.produktbeschriebung6}</Typography>
+          </Box>
+
+          <Box>
+            <Typography variant="body2" sx={{ color: "text.secondary" }}>{product.produktbeschriebung7}</Typography>
+          </Box>
+
+          <Box>
+            <Typography variant="body2" sx={{ color: "text.secondary" }}>{product.produktbeschriebung8}</Typography>
+          </Box>
+
+          <Box>
             <Typography sx={{ color: "text.primary" }} variant="body1" gutterBottom>Weitere Infos direkt beim Hersteller:</Typography>
             <Link href={product.website} target="_blank" rel="noopener noreferrer" sx={{ color: "primary.light" }}>
               {product.website}

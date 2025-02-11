@@ -144,228 +144,292 @@ export default function Home() {
           </Container>
 
           <Box sx={{ maxWidth: "1200px", mx: "auto", mt: 2 }}>
-      <Paper sx={{ p: 4, boxShadow: 3 }}>
-        <Typography
-          variant="h5"
-          gutterBottom
-          onClick={() => setOpen(!open)}
-          sx={{ cursor: "pointer" }}
-        >
-          Balkonkraftwerk Speicher – Die Zukunft der dezentralen Energieversorgung
-          <IconButton
-            size="small"
-            onClick={() => setOpen(!open)}
-            aria-label="Artikel komplett anzeigen"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          Die Energiewende ist längst in vollem Gange, und immer mehr Haushalte setzen auf erneuerbare Energien. 
-          Balkonkraftwerke sind dabei sehr beliebt, weil sie eine unkomplizierte Möglichkeit bieten, vor Ort selbst Strom zu erzeugen, 
-          einen großen Teil der Energie produzieren wir sicherlich privat. Allerdings gibt es ein Problem: Oft wird mehr Strom produziert, 
-          als gerade benötigt wird. Hier kommen Balkonkraftwerk Speicher – auch Balkonspeicher genannt – ins Spiel. Sie ermöglichen es uns, 
-          überschüssige Energie zu speichern und später abzurufen, wenn der Verbrauch ansteigt. Oder während man auf der Arbeit ist, über den Tag 
-          den Balkonspeicher laden und Abends vom kostenlosen Storm profitieren. Doch welche Vorteile bietet ein solcher Speicher wirklich? 
-          Lohnt sich die Investition auch Finanziell, und welche Entwicklungen zeichnen sich in diesem Bereich ab?
-        </Typography>
-        <Collapse in={open}>
-          <Typography variant="body1" gutterBottom>
-            <strong>Warum ein Balkonkraftwerk Speicher sinnvoll ist</strong>
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            Ein Balkonkraftwerk, auch als Steckersolargerät bekannt, besteht meist aus einem oder mehreren Solarmodulen und einem Wechselrichter, 
-            der den erzeugten Gleichstrom in haushaltsüblichen Wechselstrom umwandelt. Der so gewonnene Strom wird direkt in das heimische Netz eingespeist 
-            und kann sofort genutzt werden. Aber was passiert, wenn die Produktion einmal die aktuelle Nachfrage übersteigt? 
-            Ohne Speicher wird der Überschuss in das öffentliche Netz eingespeist – meist ohne Vergütung und für alle die Neu Einspeisen wollen,
-            sinkt die Vergütung immer weiter. Ein Balkonspeicher hingegen fängt diesen überschüssigen Strom auf und macht ihn später verfügbar.
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            <strong>Die Vorteile eines Balkonkraftwerk Speichers im Überblick:</strong>
-          </Typography>
-          <Typography variant="body1" gutterBottom component="div">
-            <ul>
-              <li>
-                <strong>Erhöhter Eigenverbrauch:</strong> Statt überschüssigen Strom ins Netz zu geben, wird er gespeichert und bei Bedarf genutzt.
-              </li>
-              <li>
-                <strong>Unabhängigkeit vom Stromnetz:</strong> Durch den Zwischenspeicher verringert sich der Strombezug aus dem öffentlichen Netz – 
-                ein Pluspunkt angesichts steigender Strompreise.
-              </li>
-              <li>
-                <strong>Optimale Nutzung der Solarenergie:</strong> Auch abends oder nachts kann so die tagsüber erzeugte Solarenergie genutzt werden.
-              </li>
-              <li>
-                <strong>Entlastung des Stromnetzes:</strong> Ein optimierter Eigenverbrauch hilft, Lastspitzen zu reduzieren.
-              </li>
-              <li>
-                <strong>Beitrag zur Energiewende:</strong> Dezentral gespeicherter Strom stärkt die Stabilität des gesamten Netzes.
-              </li>
-            </ul>
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            <strong>AC- vs. DC-gekoppelte Speicher – Welche Variante passt zu Ihnen?</strong>
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            Grundsätzlich gibt es zwei Arten von Batteriespeichern für Balkonkraftwerke: AC-gekoppelte und DC-gekoppelte Systeme.
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            <strong>AC-gekoppelte Balkonkraftwerk Speicher</strong>
-          </Typography>
-          <Typography variant="body1" gutterBottom component="div">
-            Diese Speicher punkten vor allem mit ihrer Flexibilität, denn sie können unabhängig von der vorhandenen Solaranlage nachgerüstet werden. 
-            Zudem können sie auch Strom aus dem öffentlichen Netz speichern – etwa dann, wenn dynamische Tarife besonders attraktive Preise bieten.
-          </Typography>
-          <Typography variant="body1" gutterBottom component="div">
-            <strong>✅ Vorteile:</strong>
-            <ul>
-              <li>Einfache Nachrüstung möglich</li>
-              <li>Nutzung dynamischer Stromtarife</li>
-              <li>Problemlose Integration in bestehende Systeme</li>
-            </ul>
-          </Typography>
-          <Typography variant="body1" gutterBottom component="div">
-            <strong>❌ Nachteile:</strong>
-            <ul>
-              <li>Etwas höhere Umwandlungsverluste</li>
-              <li>Aufwändigere Installation</li>
-            </ul>
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            <strong>DC-gekoppelte Balkonkraftwerk Speicher</strong>
-          </Typography>
-          <Typography variant="body1" gutterBottom component="div">
-            Hier wird der Strom direkt am Solarmodul abgegriffen, bevor er den Wechselrichter erreicht. Dadurch können Umwandlungsverluste deutlich reduziert werden.
-          </Typography>
-          <Typography variant="body1" gutterBottom component="div">
-            <strong>✅ Vorteile:</strong>
-            <ul>
-              <li>Höhere Effizienz durch weniger Umwandlungen</li>
-              <li>Geringere Energieverluste</li>
-              <li>Direkte Kopplung an die Solarmodule</li>
-            </ul>
-          </Typography>
-          <Typography variant="body1" gutterBottom component="div">
-            <strong>❌ Nachteile:</strong>
-            <ul>
-              <li>Kompliziertere Nachrüstung</li>
-              <li>In der Regel keine Kombination mit Netztarifen möglich</li>
-            </ul>
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            In den letzten Jahren setzen sich AC-gekoppelte Speicher zunehmend durch – sie bieten die nötige Flexibilität und lassen sich gut 
-            mit modernen Energiemanagement-Systemen kombinieren.
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            <strong>Balkonspeicher und die Netzdienlichkeit – Warum es so wichtig ist</strong>
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            Ein zentraler Punkt der Energiewende ist die Netzdienlichkeit von Batteriespeichern. Das bedeutet, dass solche Speicher nicht nur den Eigenverbrauch steigern,
-            sondern auch dazu beitragen, das öffentliche Stromnetz stabil zu halten. Ein aktueller Blick auf die Situation in Deutschland zeigt:
-          </Typography>
-          <Typography variant="body1" gutterBottom component="div">
-            <ul>
-              <li>Über 2 Millionen Steckersolargeräte sind bereits in Betrieb + Dunkelziffer die sich nciht regestriert haben.</li>
-              <li>Lediglich 5 % davon verfügen über einen Speicher.</li>
-              <li>
-                Dynamische Stromtarife gewinnen an Bedeutung, weil sie Verbraucher durch Preissignale zu einem netzdienlichen Laden und Entladen motivieren.
-              </li>
-            </ul>
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            Ein intelligenter Betrieb von Kleinspeichern kann helfen, Redispatch-Kosten zu senken, die durch Eingriffe zur Netzstabilisierung entstehen, 
-            und so das gesamte Energiesystem effizienter zu nutzen.
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            <strong>Gesetzliche Rahmenbedingungen für Balkonkraftwerk Speicher</strong>
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            Die Bundesregierung hat erkannt, wie wichtig dezentrale Speicherlösungen für die Energiewende sind. 
-            Seit dem 1. Januar 2025 gilt für alle Stromlieferanten die Pflicht zur Einführung dynamischer Tarife. Das ermöglicht Nutzern von Balkonspeichern, 
-            finanziell von niedrigeren Börsenstrompreisen zu profitieren – vorausgesetzt, sie passen ihren Verbrauch entsprechend an. Dennoch gibt es Herausforderungen:
-          </Typography>
-          <Typography variant="body1" gutterBottom component="div">
-            <ul>
-              <li>
-                Nur 1,9 % der Haushalte verfügen über ein intelligentes Messsystem (Smart Meter), das für eine optimale Nutzung notwendig wäre.
-              </li>
-              <li>
-                Die aktuellen Netzentgelte bieten noch nicht genug Anreize für eine flexible Lastverschiebung.
-              </li>
-            </ul>
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            Die Bundesnetzagentur arbeitet bereits an neuen Regelungen, um eine bessere Integration der Speicher in das bestehende Energiesystem zu ermöglichen.
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            <strong>Lohnt sich ein Balkonkraftwerk Speicher finanziell?</strong>
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            Die Kosten für einen Balkonspeicher liegen je nach Kapazität zwischen 500 und 3.500 Euro. Wie schnell sich die Investition amortisiert, 
-            hängt von mehreren Faktoren ab:
-          </Typography>
-          <Typography variant="body1" gutterBottom component="div">
-            <ul>
-              <li>Einsparungen durch den erhöhten Eigenverbrauch</li>
-              <li>Dynamische Stromtarife und variable Netzentgelte</li>
-              <li>Zukünftige Strompreissteigerungen</li>
-            </ul>
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            Eine beispielhafte Rechnung könnte so aussehen:
-          </Typography>
-          <Typography
-            variant="body1"
-            gutterBottom
-            component="pre"
-            sx={{ backgroundColor: "#f5f5f5", p: 2 }}
-          >
-            {`Parameter              Ohne Speicher         Mit Speicher (1 kWh)
-            Eigenverbrauch         30 %                 80 %
-            Netzbezug (€/Jahr)     600 €                300 €
-            Amortisationszeit      –                    3–8 Jahre`}
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            Zudem gibt es aktuell verschiedene Förderprogramme für Balkonspeicher – in einigen Bundesländern und Städten können Käufer sogar Zuschüsse erhalten.
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            <strong>Zukunftsperspektiven – Wohin geht die Reise?</strong>
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            Die Marktaussichten für Balkonkraftwerk Speicher sind vielversprechend. Experten erwarten in den kommenden Jahren ein starkes Wachstum 
-            und sehen vor allem folgende Trends:
-          </Typography>
-          <Typography variant="body1" gutterBottom component="div">
-            <ul>
-              <li>Smarte Speicherlösungen mit KI-gestütztem Energiemanagement</li>
-              <li>Die Kombination von Balkonspeichern mit Elektroautos als zusätzliche Speichermöglichkeit</li>
-              <li>Eine engere Vernetzung mit dem öffentlichen Stromnetz</li>
-              <li>Sinkende Kosten durch Massenproduktion</li>
-            </ul>
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            Diese Entwicklungen dürften die Attraktivität und Wirtschaftlichkeit von Balkonkraftwerk Speichern weiter steigern.
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            <strong>Fazit – Ist ein Balkonkraftwerk Speicher sinnvoll?</strong>
-          </Typography>
-          <Typography variant="body1">
-            Kurz gesagt kann ein Balkonkraftwerk mit Speicher für viele Haushalte eine lohnenswerte Investition sein – 
-            vor allem, wenn dynamische Stromtarife genutzt werden, das ist aber ein Bonus. Die Vorteile liegen klar auf der Hand: 
-            Mehr Eigenverbrauch, größere Unabhängigkeit vom öffentlichen Netz und ein wertvoller Beitrag zur Netzstabilität. 
-            Langfristig dürften die Preise für Speichersysteme weiter sinken, während der Bedarf an einer flexiblen und effizienten Stromnutzung steigt. 
-            Wer also auf eine zukunftssichere Eigenversorgung setzt, sollte die Anschaffung eines Balkonkraftwerk Speichers ernsthaft in Betracht ziehen.
-          </Typography>
-        </Collapse>
-        <Typography
-          variant="body2"
-          color="primary"
-          sx={{ cursor: "pointer", mt: 2 }}
-          onClick={() => setOpen(!open)}
-        >
-          {open ? "Weniger anzeigen" : "Mehr anzeigen"}
-        </Typography>
-      </Paper>
+            <Paper sx={{ p: 4, boxShadow: 3 }}>
+              <Typography variant="h5" gutterBottom onClick={() => setOpen(!open)}>
+                Balkonkraftwerk Speicher Vergleich – Die besten Lösungen für mehr Eigenverbrauch
+                <IconButton size="small" onClick={() => setOpen(!open)} aria-label="Artikel komplett anzeigen">
+                  <ExpandMoreIcon />
+                </IconButton>
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                Immer mehr Haushalte setzen auf Balkonkraftwerke, um ihre Energiekosten zu senken und einen Beitrag zur Energiewende zu leisten. Doch ohne Speicher wird überschüssiger Solarstrom oft ungenutzt ins Netz eingespeist – meist ohne Vergütung. Ein Balkonspeicher kann hier Abhilfe schaffen, indem er den Strom speichert und ihn zu einem späteren Zeitpunkt verfügbar macht. Dadurch steigt der Eigenverbrauch, die Stromkosten sinken und die Wirtschaftlichkeit des Balkonkraftwerks verbessert sich.
+              </Typography>
+              <Collapse in={open}>
+                <Typography variant="body1" gutterBottom>
+                  <strong>Warum lohnt sich ein Balkonkraftwerk Speicher?</strong>
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  Ein Balkonkraftwerk erzeugt tagsüber Strom, aber viele Verbraucher wie Waschmaschine oder Herd werden erst abends genutzt. Ohne Speicher fließt die überschüssige Energie ins Netz, und der Haushalt muss abends wieder teuren Strom beziehen. Ein Speicher ermöglicht es, den erzeugten Strom dann zu nutzen, wenn er tatsächlich gebraucht wird. Besonders AC-gekoppelte Speicher sind als Nachrüstlösung interessant, da sie unabhängig vom Wechselrichter funktionieren und flexibel einsetzbar sind.
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  <strong>Smart Meter und gesetzliche Neuerungen</strong>
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  Seit 2025 haben Haushalte das Recht auf einen <Link href="https://www.bmwk.de/Redaktion/DE/Pressemitteilungen/2023/05/20230512-smart-meter-gesetz-final-beschlossen.html">Smart Meter</Link>. Damit lassen sich Verbrauchsdaten in Echtzeit erfassen und der Eigenverbrauch optimieren. Hersteller wie Anker, Hoymiles oder Zendure bieten Speicherlösungen, die mit Smart Metern wie dem Shelly Pro 3EM kombiniert werden können, um eine bedarfsgerechte Einspeisung zu ermöglichen.
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  <strong>Die besten Balkonkraftwerk Speicher im Vergleich</strong>
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  <strong>Testsieger: Anker Solarbank 2 Pro E1600</strong> – Hohe Flexibilität mit vier MPPT-Trackern, integrierte Notstromsteckdose (1000 W), Smart Meter-Anbindung und erweiterbar auf 9,6 kWh Kapazität. Preis: ca. 900 Euro.
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  <strong>Maximale Kapazität: Zendure Hyper 2000</strong> – Erweiterbar auf 23 kWh, integrierter Hybrid-Wechselrichter, Unterstützung für dynamische Tarife. Preis: ab 998 Euro.
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  <strong>Einfache Inbetriebnahme: Hoymiles MS-A2</strong> – AC-gekoppelt, einfache Nachrüstung, Kapazität 2,24 kWh. Preis: ca. 999 Euro.
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  <strong>Schicke All-in-One-Lösung: Zendure AIO 2400</strong> – Kompakt, erweiterbar, Unterstützung für Smart Meter. Preis: ab 750 Euro.
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  <strong>Lohnt sich ein Balkonkraftwerk Speicher?</strong>
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  Ein Balkonkraftwerk mit 2-kWh-Speicher amortisiert sich laut Berechnungen der HTW Berlin nach etwa 5 Jahren. Ohne Speicher bereits nach 2–3 Jahren, aber mit Speicher fällt der langfristige Gewinn höher aus. Förderprogramme können die Anschaffungskosten zusätzlich senken.
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  <strong>Fazit</strong>
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  Die richtige Wahl hängt von den individuellen Bedürfnissen ab. Wer einfache Nachrüstung sucht, ist mit dem Hoymiles MS-A2 gut bedient. Wer maximale Speicherkapazität benötigt, greift zum Zendure Hyper 2000. Die Anker Solarbank 2 Pro E1600 bietet eine intelligente Steuerung mit Smart Meter-Anbindung und ist eine zukunftssichere Wahl für alle, die ihren Eigenverbrauch maximieren wollen.
+                </Typography>
+              </Collapse>
+              <Typography
+                variant="body2"
+                color="primary"
+                sx={{ cursor: "pointer", mt: 2 }}
+                onClick={() => setOpen(!open)}
+              >
+                {open ? "Weniger anzeigen" : "Mehr anzeigen"}
+              </Typography>
+            </Paper>
+          </Box>
+
+
+          <Box sx={{ maxWidth: "1200px", mx: "auto", mt: 2 }}>
+            <Paper sx={{ p: 4, boxShadow: 3 }}>
+              <Typography
+                variant="h5"
+                gutterBottom
+                onClick={() => setOpen(!open)}
+                sx={{ cursor: "pointer" }}
+              >
+                Balkonkraftwerk Speicher – Die Zukunft der dezentralen Energieversorgung
+                <IconButton
+                  size="small"
+                  onClick={() => setOpen(!open)}
+                  aria-label="Artikel komplett anzeigen"
+                >
+                  <ExpandMoreIcon />
+                </IconButton>
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                Die Energiewende ist längst in vollem Gange, und immer mehr Haushalte setzen auf erneuerbare Energien. 
+                Balkonkraftwerke sind dabei sehr beliebt, weil sie eine unkomplizierte Möglichkeit bieten, vor Ort selbst Strom zu erzeugen, 
+                einen großen Teil der Energie produzieren wir sicherlich privat. Allerdings gibt es ein Problem: Oft wird mehr Strom produziert, 
+                als gerade benötigt wird. Hier kommen Balkonkraftwerk Speicher – auch Balkonspeicher genannt – ins Spiel. Sie ermöglichen es uns, 
+                überschüssige Energie zu speichern und später abzurufen, wenn der Verbrauch ansteigt. Oder während man auf der Arbeit ist, über den Tag 
+                den Balkonspeicher laden und Abends vom kostenlosen Storm profitieren. Doch welche Vorteile bietet ein solcher Speicher wirklich? 
+                Lohnt sich die Investition auch Finanziell, und welche Entwicklungen zeichnen sich in diesem Bereich ab?
+              </Typography>
+              <Collapse in={open}>
+                <Typography variant="body1" gutterBottom>
+                  <strong>Warum ein Balkonkraftwerk Speicher sinnvoll ist</strong>
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  Ein Balkonkraftwerk, auch als Steckersolargerät bekannt, besteht meist aus einem oder mehreren Solarmodulen und einem Wechselrichter, 
+                  der den erzeugten Gleichstrom in haushaltsüblichen Wechselstrom umwandelt. Der so gewonnene Strom wird direkt in das heimische Netz eingespeist 
+                  und kann sofort genutzt werden. Aber was passiert, wenn die Produktion einmal die aktuelle Nachfrage übersteigt? 
+                  Ohne Speicher wird der Überschuss in das öffentliche Netz eingespeist – meist ohne Vergütung und für alle die Neu Einspeisen wollen,
+                  sinkt die Vergütung immer weiter. Ein Balkonspeicher hingegen fängt diesen überschüssigen Strom auf und macht ihn später verfügbar.
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  <strong>Die Vorteile eines Balkonkraftwerk Speichers im Überblick:</strong>
+                </Typography>
+                <Typography variant="body1" gutterBottom component="div">
+                  <ul>
+                    <li>
+                      <strong>Erhöhter Eigenverbrauch:</strong> Statt überschüssigen Strom ins Netz zu geben, wird er gespeichert und bei Bedarf genutzt.
+                    </li>
+                    <li>
+                      <strong>Unabhängigkeit vom Stromnetz:</strong> Durch den Zwischenspeicher verringert sich der Strombezug aus dem öffentlichen Netz – 
+                      ein Pluspunkt angesichts steigender Strompreise.
+                    </li>
+                    <li>
+                      <strong>Optimale Nutzung der Solarenergie:</strong> Auch abends oder nachts kann so die tagsüber erzeugte Solarenergie genutzt werden.
+                    </li>
+                    <li>
+                      <strong>Entlastung des Stromnetzes:</strong> Ein optimierter Eigenverbrauch hilft, Lastspitzen zu reduzieren.
+                    </li>
+                    <li>
+                      <strong>Beitrag zur Energiewende:</strong> Dezentral gespeicherter Strom stärkt die Stabilität des gesamten Netzes.
+                    </li>
+                  </ul>
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  <strong>AC- vs. DC-gekoppelte Speicher – Welche Variante passt zu Ihnen?</strong>
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  Grundsätzlich gibt es zwei Arten von Batteriespeichern für Balkonkraftwerke: AC-gekoppelte und DC-gekoppelte Systeme.
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  <strong>AC-gekoppelte Balkonkraftwerk Speicher</strong>
+                </Typography>
+                <Typography variant="body1" gutterBottom component="div">
+                  Diese Speicher punkten vor allem mit ihrer Flexibilität, denn sie können unabhängig von der vorhandenen Solaranlage nachgerüstet werden. 
+                  Zudem können sie auch Strom aus dem öffentlichen Netz speichern – etwa dann, wenn dynamische Tarife besonders attraktive Preise bieten.
+                </Typography>
+                <Typography variant="body1" gutterBottom component="div">
+                  <strong>✅ Vorteile:</strong>
+                  <ul>
+                    <li>Einfache Nachrüstung möglich</li>
+                    <li>Nutzung dynamischer Stromtarife</li>
+                    <li>Problemlose Integration in bestehende Systeme</li>
+                  </ul>
+                </Typography>
+                <Typography variant="body1" gutterBottom component="div">
+                  <strong>❌ Nachteile:</strong>
+                  <ul>
+                    <li>Etwas höhere Umwandlungsverluste</li>
+                    <li>Aufwändigere Installation</li>
+                  </ul>
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  <strong>DC-gekoppelte Balkonkraftwerk Speicher</strong>
+                </Typography>
+                <Typography variant="body1" gutterBottom component="div">
+                  Hier wird der Strom direkt am Solarmodul abgegriffen, bevor er den Wechselrichter erreicht. Dadurch können Umwandlungsverluste deutlich reduziert werden.
+                </Typography>
+                <Typography variant="body1" gutterBottom component="div">
+                  <strong>✅ Vorteile:</strong>
+                  <ul>
+                    <li>Höhere Effizienz durch weniger Umwandlungen</li>
+                    <li>Geringere Energieverluste</li>
+                    <li>Direkte Kopplung an die Solarmodule</li>
+                  </ul>
+                </Typography>
+                <Typography variant="body1" gutterBottom component="div">
+                  <strong>❌ Nachteile:</strong>
+                  <ul>
+                    <li>Kompliziertere Nachrüstung</li>
+                    <li>In der Regel keine Kombination mit Netztarifen möglich</li>
+                  </ul>
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  In den letzten Jahren setzen sich AC-gekoppelte Speicher zunehmend durch – sie bieten die nötige Flexibilität und lassen sich gut 
+                  mit modernen Energiemanagement-Systemen kombinieren.
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  <strong>Balkonspeicher und die Netzdienlichkeit – Warum es so wichtig ist</strong>
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  Ein zentraler Punkt der Energiewende ist die Netzdienlichkeit von Batteriespeichern. Das bedeutet, dass solche Speicher nicht nur den Eigenverbrauch steigern,
+                  sondern auch dazu beitragen, das öffentliche Stromnetz stabil zu halten. Ein aktueller Blick auf die Situation in Deutschland zeigt:
+                </Typography>
+                <Typography variant="body1" gutterBottom component="div">
+                  <ul>
+                    <li>Über 2 Millionen Steckersolargeräte sind bereits in Betrieb + Dunkelziffer die sich nciht regestriert haben.</li>
+                    <li>Lediglich 5 % davon verfügen über einen Speicher.</li>
+                    <li>
+                      Dynamische Stromtarife gewinnen an Bedeutung, weil sie Verbraucher durch Preissignale zu einem netzdienlichen Laden und Entladen motivieren.
+                    </li>
+                  </ul>
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  Ein intelligenter Betrieb von Kleinspeichern kann helfen, Redispatch-Kosten zu senken, die durch Eingriffe zur Netzstabilisierung entstehen, 
+                  und so das gesamte Energiesystem effizienter zu nutzen.
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  <strong>Gesetzliche Rahmenbedingungen für Balkonkraftwerk Speicher</strong>
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  Die Bundesregierung hat erkannt, wie wichtig dezentrale Speicherlösungen für die Energiewende sind. 
+                  Seit dem 1. Januar 2025 gilt für alle Stromlieferanten die Pflicht zur Einführung dynamischer Tarife. Das ermöglicht Nutzern von Balkonspeichern, 
+                  finanziell von niedrigeren Börsenstrompreisen zu profitieren – vorausgesetzt, sie passen ihren Verbrauch entsprechend an. Dennoch gibt es Herausforderungen:
+                </Typography>
+                <Typography variant="body1" gutterBottom component="div">
+                  <ul>
+                    <li>
+                      Nur 1,9 % der Haushalte verfügen über ein intelligentes Messsystem (Smart Meter), das für eine optimale Nutzung notwendig wäre.
+                    </li>
+                    <li>
+                      Die aktuellen Netzentgelte bieten noch nicht genug Anreize für eine flexible Lastverschiebung.
+                    </li>
+                  </ul>
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  Die Bundesnetzagentur arbeitet bereits an neuen Regelungen, um eine bessere Integration der Speicher in das bestehende Energiesystem zu ermöglichen.
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  <strong>Lohnt sich ein Balkonkraftwerk Speicher finanziell?</strong>
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  Die Kosten für einen Balkonspeicher liegen je nach Kapazität zwischen 500 und 3.500 Euro. Wie schnell sich die Investition amortisiert, 
+                  hängt von mehreren Faktoren ab:
+                </Typography>
+                <Typography variant="body1" gutterBottom component="div">
+                  <ul>
+                    <li>Einsparungen durch den erhöhten Eigenverbrauch</li>
+                    <li>Dynamische Stromtarife und variable Netzentgelte</li>
+                    <li>Zukünftige Strompreissteigerungen</li>
+                  </ul>
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  Eine beispielhafte Rechnung könnte so aussehen:
+                </Typography>
+                <Typography
+                  variant="body1"
+                  gutterBottom
+                  component="pre"
+                  sx={{ backgroundColor: "#f5f5f5", p: 2 }}
+                >
+                  {`Parameter              Ohne Speicher         Mit Speicher (1 kWh)
+                  Eigenverbrauch         30 %                 80 %
+                  Netzbezug (€/Jahr)     600 €                300 €
+                  Amortisationszeit      –                    3–8 Jahre`}
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  Zudem gibt es aktuell verschiedene Förderprogramme für Balkonspeicher – in einigen Bundesländern und Städten können Käufer sogar Zuschüsse erhalten.
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  <strong>Zukunftsperspektiven – Wohin geht die Reise?</strong>
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  Die Marktaussichten für Balkonkraftwerk Speicher sind vielversprechend. Experten erwarten in den kommenden Jahren ein starkes Wachstum 
+                  und sehen vor allem folgende Trends:
+                </Typography>
+                <Typography variant="body1" gutterBottom component="div">
+                  <ul>
+                    <li>Smarte Speicherlösungen mit KI-gestütztem Energiemanagement</li>
+                    <li>Die Kombination von Balkonspeichern mit Elektroautos als zusätzliche Speichermöglichkeit</li>
+                    <li>Eine engere Vernetzung mit dem öffentlichen Stromnetz</li>
+                    <li>Sinkende Kosten durch Massenproduktion</li>
+                  </ul>
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  Diese Entwicklungen dürften die Attraktivität und Wirtschaftlichkeit von Balkonkraftwerk Speichern weiter steigern.
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  <strong>Fazit – Ist ein Balkonkraftwerk Speicher sinnvoll?</strong>
+                </Typography>
+                <Typography variant="body1">
+                  Kurz gesagt kann ein Balkonkraftwerk mit Speicher für viele Haushalte eine lohnenswerte Investition sein – 
+                  vor allem, wenn dynamische Stromtarife genutzt werden, das ist aber ein Bonus. Die Vorteile liegen klar auf der Hand: 
+                  Mehr Eigenverbrauch, größere Unabhängigkeit vom öffentlichen Netz und ein wertvoller Beitrag zur Netzstabilität. 
+                  Langfristig dürften die Preise für Speichersysteme weiter sinken, während der Bedarf an einer flexiblen und effizienten Stromnutzung steigt. 
+                  Wer also auf eine zukunftssichere Eigenversorgung setzt, sollte die Anschaffung eines Balkonkraftwerk Speichers ernsthaft in Betracht ziehen.
+                </Typography>
+              </Collapse>
+              <Typography
+                variant="body2"
+                color="primary"
+                sx={{ cursor: "pointer", mt: 2 }}
+                onClick={() => setOpen(!open)}
+              >
+                {open ? "Weniger anzeigen" : "Mehr anzeigen"}
+              </Typography>
+            </Paper>
           </Box>
             
           <Box sx={{ maxWidth: "1200px", mx: "auto", mt: 2 }}>
