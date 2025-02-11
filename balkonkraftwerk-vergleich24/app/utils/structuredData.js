@@ -4,6 +4,7 @@ export const generateProductJsonLd = (product) => ({
     "@type": "Product",
     "name": product.name || "Unbekannt",
     "description": product.produktbeschriebung || "Keine Beschreibung verfügbar",
+    "image": product.image || "/default_balkonspeicher.webp",
     "brand": { "@type": "Brand", "name": "Balkonspeicher24" },
     "additionalProperty": [
       { "@type": "PropertyValue", "name": "Akkukapazität", "value": `${product.akkukapazitaet} Wh` },
@@ -17,7 +18,26 @@ export const generateProductJsonLd = (product) => ({
       "priceCurrency": "EUR",
       "price": product.preis || "350",
       "availability": "https://schema.org/InStock",
-      "url": product.website || `https://balkonspeicher24.shortaktien.de/product/${product.id}`
+      "url": product.website || `https://balkonspeicher24.shortaktien.de/product/${product.id}`,
+      // Falls keine Versanddetails vorhanden sind, wird ein Standardobjekt eingefügt.
+    "shippingDetails": product.shippingDetails || {
+      "@type": "OfferShippingDetails",
+      "shippingDestination": {
+        "@type": "DefinedRegion",
+        "name": "Deutschland"
+      },
+      "shippingRate": {
+        "@type": "MonetaryAmount",
+        "value": "0",
+        "currency": "EUR"
+      }
+    },
+    // Falls keine Rückgaberegelung vorhanden ist, wird ein Standardobjekt eingefügt.
+    "hasMerchantReturnPolicy": product.hasMerchantReturnPolicy || {
+      "@type": "MerchantReturnPolicy",
+      "returnPolicyCategory": "https://schema.org/NonRefundable",
+      "name": "Keine Rückgaberegelung"
+      }
     },
     "url": product.website || `https://balkonspeicher24.shortaktien.de/product/${product.id}`
   });
