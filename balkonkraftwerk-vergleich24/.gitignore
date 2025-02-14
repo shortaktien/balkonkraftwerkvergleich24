@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+AMAZON_ACCESS_KEY=dein_access_key
+AMAZON_SECRET_KEY=dein_secret_key
+AMAZON_PARTNER_TAG=dein_partner_tag
