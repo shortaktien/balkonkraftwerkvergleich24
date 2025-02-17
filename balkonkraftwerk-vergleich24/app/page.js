@@ -14,7 +14,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Image from "next/image";
 import { HomeJsonLd } from "./utils/homeStructuredData";
 import Head from "next/head";
-import Script from "next/script";
 
 <Image src="/solar-icon.png" alt="Solar Icon" width={40} height={40} />
 

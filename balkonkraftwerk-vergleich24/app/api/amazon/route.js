@@ -4,8 +4,14 @@ import { URL } from "url";
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
-  // Verwende hier einen Query-Parameter für die Suche (zum Beispiel "query")
-  const query = searchParams.get("query") || "kindle";
+  const asin = searchParams.get("asin");
+
+  if (!asin || asin === "-") {
+    return new Response( 
+      JSON.stringify({error:" Keine ASIN angegeben. Bitte melden."}),
+      { status: 400}
+    );
+  }
 
   // Hole die Amazon-Partner-Zugangsdaten aus den Umgebungsvariablen
   const accessKey = process.env.AMAZON_ACCESS_KEY;
@@ -22,23 +28,21 @@ export async function GET(request) {
   // Für den deutschen Markt: 
   const region = "eu-west-1"; 
   const host = "webservices.amazon.de"; 
-  const endpoint = `https://${host}/paapi5/searchitems`;
+  const endpoint = `https://${host}/paapi5/getitems`;
 
   // Aufbau des Request-Payloads für SearchItems
   const payload = {
-    Marketplace: "www.amazon.de", // oder "www.amazon.com", wenn dein Konto das unterstützt
-    PartnerType: "Associates",
+    ItemIds: [asin],
+    Resources: ["Offers.Listings.Price"],
     PartnerTag: partnerTag,
-    Keywords: query,
-    SearchIndex: "All",
-    ItemCount: 3,
-    Resources: ["Images.Primary.Large", "ItemInfo.Title", "Offers.Listings.Price"]
+    PartnerType: "Associates",
+    Marketplace: "www.amazon.de"
   };
 
   // Erstelle das Options-Objekt
   const options = {
     host,
-    path: "/paapi5/searchitems",
+    path: "/paapi5/getitems",
     service: "ProductAdvertisingAPI",
     region,
     method: "POST",
@@ -49,7 +53,7 @@ export async function GET(request) {
   };
 
   // Zusätzliche erforderliche Header hinzufügen
-  options.headers["X-Amz-Target"] = "com.amazon.paapi5.v1.ProductAdvertisingAPIv1.SearchItems";
+  options.headers["X-Amz-Target"] = "com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetItems";
   options.headers["Content-Encoding"] = "amz-1.0";
 
   // Signiere die Anfrage (AWS Signature Version 4)

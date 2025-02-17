@@ -1,12 +1,7 @@
-//app/product/[id]/page.js
-"use client";
-
-import { useContext, useEffect, useState } from "react";
-import { useParams} from "next/navigation";
-import { DarkModeContext } from "../../context/DarkModeContext";
-import { getProduct, ProductJsonLd} from "./ProductData";
-import Head from "next/head";
+// app/product/[id]/page.js
+import { getProduct, ProductJsonLd } from "./ProductData";
 import Header from "../../Header";
+import Footer from "../../Footer";
 import {
   Box,
   Typography,
@@ -21,13 +16,17 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  Container,
+  CssBaseline,
   ThemeProvider,
   createTheme,
-  CssBaseline,
-  Container,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Link from "@mui/material/Link";
+import Head from "next/head";
+
+// Diese Seite wird alle 24 Stunden (86400 Sekunden) neu generiert
+export const revalidate = 86400;
 
 // Light Theme
 const lightTheme = createTheme({
@@ -38,7 +37,7 @@ const lightTheme = createTheme({
   },
 });
 
-// Dark Theme
+// Dark Theme (optional – hier wird aktuell nur das LightTheme genutzt)
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -47,23 +46,9 @@ const darkTheme = createTheme({
   },
 });
 
-export default function ProductDetail() {
-  const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
-  const params = useParams();
+export default async function ProductDetail({ params }) {
   const { id } = params;
-  const [product, setProduct] = useState(null);
-
-  //const product = products.find((p) => p.id === id);
-
-  // Produkt laden
-  useEffect(() => {
-    async function fetchProduct() {
-      const fetchedProduct = await getProduct(id);
-      setProduct(fetchedProduct);
-    }
-    fetchProduct();
-  }, [id]);
-
+  const product = getProduct(id);
   if (!product) {
     return (
       <Container>
@@ -72,200 +57,238 @@ export default function ProductDetail() {
     );
   }
 
-   
-
-  const allFields = [
-    { key: "akkukapazitaet", label: "Akkukapazität" },
-    { key: "maxKapazitaet", label: "Max. Kapazität" },
-    { key: "erweiterbar", label: "Erweiterbar", isBoolean: true },
-    { key: "ladezyklen", label: "Ladezyklen" },
-    { key: "garantie", label: "Garantie (Jahre)" },
-    { key: "anzahlMPPT", label: "Anzahl MPPT" },
-    { key: "maxMC4", label: "Max. MC4" },
-    { key: "maxEingang", label: "Max. Eingang" },
-    { key: "maxEingangModule", label: "Max. Eingang Module" },
-    { key: "solarErweiterbar", label: "Solar Erweiterbar", isBoolean: true },
-    { key: "mppt1A", label: "MPPT1 A" },
-    { key: "mppt1V", label: "MPPT1 V" },
-    { key: "mppt2A", label: "MPPT2 A" },
-    { key: "mppt2V", label: "MPPT2 V" },
-    { key: "mppt3A", label: "MPPT3 A" },
-    { key: "mppt3V", label: "MPPT3 V" },
-    { key: "mppt4A", label: "MPPT4 A" },
-    { key: "mppt4V", label: "MPPT4 V" },
-    { key: "gewichtAkku", label: "Gewicht Akku" },
-    { key: "gewichtLaderegler", label: "Gewicht Laderegler" },
-    { key: "akkuLaenge", label: "Akku Länge (mm)" },
-    { key: "akkuBreite", label: "Akku Breite (mm)" },
-    { key: "akkuHoehe", label: "Akku Höhe (mm)" },
-    { key: "ladereglerLaenge", label: "Laderegler Länge" },
-    { key: "ladereglerBreite", label: "Laderegler Breite" },
-    { key: "ladereglerHoehe", label: "Laderegler Höhe" },
-    { key: "bt", label: "Bluetooth", isBoolean: true },
-    { key: "wifi", label: "WiFi", isBoolean: true },
-    { key: "app", label: "App", isBoolean: true },
-    { key: "cloud", label: "Cloud", isBoolean: true },
-    { key: "mqttCloud", label: "MQTT Cloud", isBoolean: true },
-    { key: "mqttOffline", label: "MQTT Offline" },
-    { key: "heizung", label: "Heizung", isBoolean: true },
-    { key: "ipKlasse", label: "IP-Klasse" },
-    { key: "notstrom", label: "Notstrom", isBoolean: true },
-    { key: "maxAusgang", label: "Max. Ausgang" },
-    { key: "shellyPro", label: "Shelly Pro 3 EM", isBoolean: true },
-    { key: "homeassistent", label: "Home Assistent", isBoolean: true },
-    { key: "wechselrichter", label: "Mit Wechselrichter", isBoolean: true },
-    { key: "bidirektional", label: "Bidirektional", isBoolean: true },
-    { key: "ladeanschluss", label: "230V Ladeanschluss", isBoolean: true },
-    // Website/Amazon verlinken wir separat
-  ];
+  // Erzeuge das JSON-LD
+  const productJsonLd = ProductJsonLd({ id });
+  
+  // Optional: Falls der Preis serverseitig noch nicht im Produkt enthalten ist,
+  // könntest du hier einen zusätzlichen Fetch einbauen, z.B.:
+  // product.price = await fetchPrice(product.asin);
 
   return (
     <>
-       <Head>
+      <Head>
         <title>{product.name} | Balkonspeicher24</title>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd, null, 2) }}
+        />
       </Head>
-      <ProductJsonLd id={id} />
-    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-      <CssBaseline />
-      <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
-      <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-          <Typography sx={{ color: "text.primary" }} variant="h4" fontWeight="bold" gutterBottom>
-            {product.name}
-          </Typography>
-
-          <TableContainer component={Paper} elevation={3} sx={{ backgroundColor: "background.paper" }}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell colSpan={2} sx={{ backgroundColor: "background.default", color: "text.primary", fontWeight: "bold" }}>
-                    Wichtigste Daten
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                  <TableCell>Akkukapazität</TableCell>
-                  <TableCell>{product.akkukapazitaet} Wh</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Garantie</TableCell>
-                  <TableCell>{product.garantie} Jahre</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Max. Eingang</TableCell>
-                  <TableCell>{product.maxEingang}</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
-
-          <Accordion sx={{ backgroundColor: "background.paper", borderRadius: 2 }}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ backgroundColor: "background.default", borderRadius: 2 }}>
-              <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>Alle Eigenschaften anzeigen</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <TableContainer component={Paper} elevation={2} sx={{ backgroundColor: "background.paper" }}>
-                <Table size="small">
-                  <TableBody>
-                    {allFields.map(({ key, label, isBoolean }) => {
-                      const value = product[key];
-                      let displayValue = value;
-                      if (typeof value === "boolean" && isBoolean) {
-                        displayValue = value ? "Ja" : "Nein";
-                      }
-                      return (
-                        <TableRow key={key}>
-                          <TableCell>{label}</TableCell>
-                          <TableCell>{displayValue}</TableCell>
-                        </TableRow>
-                      );
-                    })}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </AccordionDetails>
-          </Accordion>
-
-          <Box>
-            <Typography sx={{ color: "text.primary" }} variant="body1" gutterBottom>Kurze Produktbeschreibung:</Typography>
-            <Typography variant="body2" sx={{ color: "text.secondary" }}>{product.produktbeschriebung}</Typography>
-          </Box>
-
-          <Box>
-            <Typography variant="body2" sx={{ color: "text.secondary" }}>{product.produktbeschriebung2}</Typography>
-          </Box>
-
-          <Box>
-            <Typography variant="body2" sx={{ color: "text.secondary" }}>{product.produktbeschriebung3}</Typography>
-          </Box>
-
-          <Box>
-            <Typography variant="body2" sx={{ color: "text.secondary" }}>{product.produktbeschriebung4}</Typography>
-          </Box>
-
-          <Box>
-            <Typography variant="body2" sx={{ color: "text.secondary" }}>{product.produktbeschriebung5}</Typography>
-          </Box>
-
-          <Box>
-            <Typography variant="body2" sx={{ color: "text.secondary" }}>{product.produktbeschriebung6}</Typography>
-          </Box>
-
-          <Box>
-            <Typography variant="body2" sx={{ color: "text.secondary" }}>{product.produktbeschriebung7}</Typography>
-          </Box>
-
-          <Box>
-            <Typography variant="body2" sx={{ color: "text.secondary" }}>{product.produktbeschriebung8}</Typography>
-          </Box>
-
-          <Box>
-            <Typography sx={{ color: "text.primary" }} variant="body1" gutterBottom>Weitere Infos direkt beim Hersteller:</Typography>
-            <Link href={product.website} target="_blank" rel="noopener noreferrer" sx={{ color: "primary.light" }}>
-              {product.website}
-            </Link>
-          </Box>
-
-          {product.amazon && product.amazon !== "-" && (
-            <Box sx={{ textAlign: "center", mt: 2 }}>
-              <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: "#FFD814",
-                  color: "#111",
-                  "&:hover": { backgroundColor: "#F7CA00" },
-                  fontWeight: "bold",
-                  padding: "10px 20px",
-                  fontSize: "16px",
-                  borderRadius: "8px",
-                }}
-                href={product.amazon}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                🔎 Jetzt Preis prüfen
-              </Button>
-            </Box>
-          )}
-
-          <Box sx={{ display: "flex", gap: 1 }}>
-            <Button variant="contained" color="primary" onClick={() => history.back()}>Zurück</Button>
-            <Button sx={{backgroundColor: "#eb5656", color: "black"}} variant="outlined" onClick={() => window.location.href = `mailto:lfsanja@gmail.com?subject=Bug melden&body=Produkt: ${product.id}`}>Bug melden</Button>
-          </Box>
-            <Typography variant="body2" sx={{ fontStyle: "italic" }}>Dies ist ein gemeinschaftsbasiertes Projekt; 
-              wir können daher keine Haftung für die Vollständigkeit oder Richtigkeit der angezeigten Daten übernehmen. 
-              Sollten Ihnen fehlerhafte Informationen auffallen, nutzen Sie bitte den „BUG MELDEN“-Button, 
-              damit wir die Datenlage entsprechend korrigieren können.</Typography>
-            <Typography variant="body2" sx={{ fontStyle: "italic" }}>* Links zu Amazon sind Ref-Links, 
-              die ausschließlich dem Erhalt dieses Projekts dienen. Für den Nutzer entstehen keine zusätzlichen 
-              Kosten.
+      {/* Hier nutzen wir das LightTheme – du könntest das auch dynamisch machen */}
+      <ThemeProvider theme={lightTheme}>
+        <CssBaseline />
+        <Header />
+        <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+            <Typography sx={{ color: "text.primary" }} variant="h4" fontWeight="bold" gutterBottom>
+              {product.name}
             </Typography>
 
+            <TableContainer component={Paper} elevation={3} sx={{ backgroundColor: "background.paper" }}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell
+                      colSpan={2}
+                      sx={{ backgroundColor: "background.default", color: "text.primary", fontWeight: "bold" }}
+                    >
+                      Wichtigste Daten
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>Akkukapazität</TableCell>
+                    <TableCell>{product.akkukapazitaet} Wh</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Garantie</TableCell>
+                    <TableCell>{product.garantie} Jahre</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Max. Eingang</TableCell>
+                    <TableCell>{product.maxEingang}</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
 
-        </Box>
-      </Container>
-    </ThemeProvider>
+            <Accordion sx={{ backgroundColor: "background.paper", borderRadius: 2 }}>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ backgroundColor: "background.default", borderRadius: 2 }}>
+                <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
+                  Alle Eigenschaften anzeigen
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <TableContainer component={Paper} elevation={2} sx={{ backgroundColor: "background.paper" }}>
+                  <Table size="small">
+                    <TableBody>
+                      {[
+                        { key: "akkukapazitaet", label: "Akkukapazität" },
+                        { key: "maxKapazitaet", label: "Max. Kapazität" },
+                        { key: "erweiterbar", label: "Erweiterbar", isBoolean: true },
+                        { key: "ladezyklen", label: "Ladezyklen" },
+                        { key: "garantie", label: "Garantie (Jahre)" },
+                        { key: "anzahlMPPT", label: "Anzahl MPPT" },
+                        { key: "maxMC4", label: "Max. MC4" },
+                        { key: "maxEingang", label: "Max. Eingang" },
+                        { key: "maxEingangModule", label: "Max Eingang Module" },
+                        { key: "solarErweiterbar", label: "Solar Erweiterbar", isBoolean: true },
+                        { key: "mppt1A", label: "MPPT1 A" },
+                        { key: "mppt1V", label: "MPPT1 V" },
+                        { key: "mppt2A", label: "MPPT2 A" },
+                        { key: "mppt2V", label: "MPPT2 V" },
+                        { key: "mppt3A", label: "MPPT3 A" },
+                        { key: "mppt3V", label: "MPPT3 V" },
+                        { key: "mppt4A", label: "MPPT4 A" },
+                        { key: "mppt4V", label: "MPPT4 V" },
+                        { key: "gewichtAkku", label: "Gewicht Akku" },
+                        { key: "gewichtLaderegler", label: "Gewicht Laderegler" },
+                        { key: "akkuLaenge", label: "Akku Länge (mm)" },
+                        { key: "akkuBreite", label: "Akku Breite (mm)" },
+                        { key: "akkuHoehe", label: "Akku Höhe (mm)" },
+                        { key: "ladereglerLaenge", label: "Laderegler Länge" },
+                        { key: "ladereglerBreite", label: "Laderegler Breite" },
+                        { key: "ladereglerHoehe", label: "Laderegler Höhe" },
+                        { key: "bt", label: "Bluetooth", isBoolean: true },
+                        { key: "wifi", label: "WiFi", isBoolean: true },
+                        { key: "app", label: "App", isBoolean: true },
+                        { key: "cloud", label: "Cloud", isBoolean: true },
+                        { key: "mqttCloud", label: "MQTT Cloud", isBoolean: true },
+                        { key: "mqttOffline", label: "MQTT Offline" },
+                        { key: "heizung", label: "Heizung", isBoolean: true },
+                        { key: "ipKlasse", label: "IP-Klasse" },
+                        { key: "notstrom", label: "Notstrom", isBoolean: true },
+                        { key: "maxAusgang", label: "Max. Ausgang" },
+                        { key: "shellyPro", label: "Shelly Pro 3 EM", isBoolean: true },
+                        { key: "homeassistent", label: "Home Assistent", isBoolean: true },
+                        { key: "wechselrichter", label: "Mit Wechselrichter", isBoolean: true },
+                        { key: "bidirektional", label: "Bidirektional", isBoolean: true },
+                        { key: "ladeanschluss", label: "230V Ladeanschluss", isBoolean: true },
+                      ].map(({ key, label, isBoolean }) => {
+                        const value = product[key];
+                        let displayValue = value;
+                        if (typeof value === "boolean" && isBoolean) {
+                          displayValue = value ? "Ja" : "Nein";
+                        }
+                        return (
+                          <TableRow key={key}>
+                            <TableCell>{label}</TableCell>
+                            <TableCell>{displayValue}</TableCell>
+                          </TableRow>
+                        );
+                      })}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </AccordionDetails>
+            </Accordion>
+
+            <Box>
+              <Typography sx={{ color: "text.primary" }} variant="body1" gutterBottom>
+                Kurze Produktbeschreibung:
+              </Typography>
+              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                {product.produktbeschriebung}
+              </Typography>
+            </Box>
+
+            <Box>
+              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                {product.produktbeschriebung2}
+              </Typography>
+            </Box>
+
+            <Box>
+              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                {product.produktbeschriebung3}
+              </Typography>
+            </Box>
+
+            <Box>
+              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                {product.produktbeschriebung4}
+              </Typography>
+            </Box>
+
+            <Box>
+              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                {product.produktbeschriebung5}
+              </Typography>
+            </Box>
+
+            <Box>
+              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                {product.produktbeschriebung6}
+              </Typography>
+            </Box>
+
+            <Box>
+              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                {product.produktbeschriebung7}
+              </Typography>
+            </Box>
+
+            <Box>
+              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                {product.produktbeschriebung8}
+              </Typography>
+            </Box>
+
+            <Box>
+              <Typography sx={{ color: "text.primary" }} variant="body1" gutterBottom>
+                Weitere Infos direkt beim Hersteller:
+              </Typography>
+              <Link href={product.website} target="_blank" rel="noopener noreferrer" sx={{ color: "primary.light" }}>
+                {product.website}
+              </Link>
+            </Box>
+
+            {product.amazon && product.amazon !== "-" && (
+              <Box sx={{ textAlign: "center", mt: 2 }}>
+                <Button
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "#FFD814",
+                    color: "#111",
+                    "&:hover": { backgroundColor: "#F7CA00" },
+                    fontWeight: "bold",
+                    padding: "10px 20px",
+                    fontSize: "16px",
+                    borderRadius: "8px",
+                  }}
+                  href={product.amazon}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  🔎 Jetzt Preis prüfen
+                </Button>
+              </Box>
+            )}
+
+            <Box sx={{ display: "flex", gap: 1 }}>
+              <Button variant="contained" color="primary" onClick={() => history.back()}>
+                Zurück
+              </Button>
+              <Button
+                sx={{ backgroundColor: "#eb5656", color: "black" }}
+                variant="outlined"
+                onClick={() =>
+                  (window.location.href = `mailto:lfsanja@gmail.com?subject=Bug melden&body=Produkt: ${product.id}`)
+                }
+              >
+                Bug melden
+              </Button>
+            </Box>
+            <Typography variant="body2" sx={{ fontStyle: "italic" }}>
+              Dies ist ein gemeinschaftsbasiertes Projekt; wir können daher keine Haftung für die Vollständigkeit oder Richtigkeit der angezeigten Daten übernehmen. Sollten Ihnen fehlerhafte Informationen auffallen, nutzen Sie bitte den „BUG MELDEN“-Button, damit wir die Datenlage entsprechend korrigieren können.
+            </Typography>
+            <Typography variant="body2" sx={{ fontStyle: "italic" }}>
+              * Links zu Amazon sind Ref-Links, die ausschließlich dem Erhalt dieses Projekts dienen. Für den Nutzer entstehen keine zusätzlichen Kosten.
+            </Typography>
+          </Box>
+        </Container>
+        <Footer />
+      </ThemeProvider>
     </>
   );
 }

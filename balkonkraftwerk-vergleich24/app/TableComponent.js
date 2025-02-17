@@ -18,6 +18,7 @@ import {
  import rows from './products.json';
  import TableFilters from './TableFilters';
  import TableUserSettings from './TableUserSettings';
+ import AmazonPrice from "./api/amazon/AmazonPrice";
 
 export default function MaterialUITable() {
     const [page, setPage] = React.useState(0);
@@ -51,9 +52,8 @@ export default function MaterialUITable() {
     garantie: true,
     anzahlMPPT: true,
     maxEingang: true,
-    maxEingangModule: true,
     solarErweiterbar: true,
-
+    asin: true,
   });
 
 
@@ -370,6 +370,18 @@ export default function MaterialUITable() {
                 {visibleColumns.ladeanschluss && (
                 <TableCell style={{ width: 150 }}>Website</TableCell>
                 )}
+
+                {visibleColumns.asin && (
+                  <TableCell style={{ width: 150 }} sortDirection={orderBy === 'asin' ? order : false}>
+                    <TableSortLabel
+                      active={orderBy === 'asin'}
+                      direction={orderBy === 'asin' ? order : 'asc'}
+                      onClick={(event) => handleRequestSort(event, 'asin')}
+                    >Preis</TableSortLabel>
+                  
+                  
+                  </TableCell>
+                )}
                 <TableCell style={{ width: 150 }}>Amazon</TableCell>
               
               </TableRow>
@@ -432,6 +444,18 @@ export default function MaterialUITable() {
                     {visibleColumns.website && (<TableCell>
                         <Link href={row.website} underline="hover" target="_blank" rel="noopener noreferrer">{'Hersteller Seite'}</Link>
                     </TableCell>)}
+                      
+                    <TableCell style={{ width: 150}}>
+                      {row.asin && row.asin !== "-" ? (
+                        <AmazonPrice asin={row.asin}/>
+                      ) : (
+                        <p>
+                          Nicht gefunden
+                        </p>
+                      )
+                      }
+                    </TableCell> 
+
                     <TableCell>
                       {row.amazon && row.amazon !== "-" ? (
                         <Button
