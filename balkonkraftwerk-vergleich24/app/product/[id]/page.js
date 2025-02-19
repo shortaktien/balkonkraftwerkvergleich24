@@ -1,10 +1,10 @@
 // app/product/[id]/page.js
-import { getProduct, ProductJsonLd } from "./ProductData";
+import { getProduct, ProductJsonLd, getAmazonPrice } from "./ProductData";
 import Head from "next/head";
 import { Container, Typography } from "@mui/material";
 import ProductDetailClient from "./ProductDetailClient";
 
-export const revalidate = 86400;
+export const revalidate = 86400; // ISR: 24 Stunden
 
 export default async function ProductDetail({ params }) {
   const { id } = params;
@@ -17,15 +17,17 @@ export default async function ProductDetail({ params }) {
     );
   }
 
+  // Amazon-Preis wird serverseitig abgerufen.
+  const amazonPrice = await getAmazonPrice(product.asin);
+
   return (
     <>
       <Head>
         <title>{product.name} | Balkonspeicher24</title>
-        {/* Nutzt den serverseitig generierten JSON‑LD */}
         <ProductJsonLd id={id} />
       </Head>
-      {/* Übergibt das serialisierbare Produktobjekt an den Client Component */}
-      <ProductDetailClient product={product} />
+      {/* Übergabe des Produktobjekts plus des serverseitig abgerufenen Preises */}
+      <ProductDetailClient product={product} amazonPrice={amazonPrice} />
     </>
   );
 }

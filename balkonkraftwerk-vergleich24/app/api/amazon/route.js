@@ -60,7 +60,7 @@ export async function GET(request) {
   aws4.sign(options, { accessKeyId: accessKey, secretAccessKey: secretKey });
 
   // Debug: Ausgabe der signierten Optionen
-  console.log("Signierte Optionen:", options);
+  //console.log("Signierte Optionen:", options);
 
   try {
     const response = await fetch(endpoint, {

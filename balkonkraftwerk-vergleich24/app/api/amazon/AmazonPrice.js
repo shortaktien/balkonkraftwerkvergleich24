@@ -1,4 +1,6 @@
 // AmazonPrice.jsx
+"use client";
+
 import { useEffect, useState } from "react";
 
 function AmazonPrice({ asin }) {

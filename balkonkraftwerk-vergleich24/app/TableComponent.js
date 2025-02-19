@@ -383,6 +383,7 @@ export default function MaterialUITable() {
                   </TableCell>
                 )}
                 <TableCell style={{ width: 150 }}>Amazon</TableCell>
+                
               
               </TableRow>
             </TableHead>
@@ -446,8 +447,8 @@ export default function MaterialUITable() {
                     </TableCell>)}
                       
                     <TableCell style={{ width: 150}}>
-                      {row.asin && row.asin !== "-" ? (
-                        <AmazonPrice asin={row.asin}/>
+                      {row.AmazonPrice ? (
+                        <div>{row.amazonPrice}</div>
                       ) : (
                         <p>
                           Nicht gefunden

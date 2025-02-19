@@ -26,7 +26,6 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Link from "@mui/material/Link";
 
-// Hier definieren wir das Light Theme
 const lightTheme = createTheme({
   palette: {
     mode: "light",
@@ -35,91 +34,89 @@ const lightTheme = createTheme({
   },
 });
 
-// Dark Theme (optional – hier wird aktuell nur das LightTheme genutzt)
 const darkTheme = createTheme({
-    palette: {
-      mode: "dark",
-      background: { default: "#121212", paper: "#1E1E1E" },
-      text: { primary: "#ffffff", secondary: "#B3B3B3" },
-    },
-  });
-  
+  palette: {
+    mode: "dark",
+    background: { default: "#121212", paper: "#1E1E1E" },
+    text: { primary: "#ffffff", secondary: "#B3B3B3" },
+  },
+});
 
-export default function ProductDetailClient({ product }) {
-  // Optional: Für Accordions, etc.
+export default function ProductDetailClient({ product, amazonPrice }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <ThemeProvider theme={lightTheme}>
-      <CssBaseline />
-      <Header />
-      <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-          <Typography
-            sx={{ color: "text.primary" }}
-            variant="h4"
-            fontWeight="bold"
-            gutterBottom
-          >
-            {product.name}
-          </Typography>
-
-          <TableContainer
-            component={Paper}
-            elevation={3}
-            sx={{ backgroundColor: "background.paper" }}
-          >
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell
-                    colSpan={2}
-                    sx={{
-                      backgroundColor: "background.default",
-                      color: "text.primary",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Wichtigste Daten
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                  <TableCell>Akkukapazität</TableCell>
-                  <TableCell>{product.akkukapazitaet} Wh</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Garantie</TableCell>
-                  <TableCell>{product.garantie} Jahre</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Max. Eingang</TableCell>
-                  <TableCell>{product.maxEingang}</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
-
-          <Accordion sx={{ backgroundColor: "background.paper", borderRadius: 2 }}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              sx={{ backgroundColor: "background.default", borderRadius: 2 }}
-              onClick={() => setOpen(!open)}
+    <>
+      <ThemeProvider theme={lightTheme}>
+        <CssBaseline />
+        <Header />
+        <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+            <Typography
+              sx={{ color: "text.primary" }}
+              variant="h4"
+              fontWeight="bold"
+              gutterBottom
             >
-              <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
-                Alle Eigenschaften anzeigen
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <TableContainer
-                component={Paper}
-                elevation={2}
-                sx={{ backgroundColor: "background.paper" }}
+              {product.name}
+            </Typography>
+
+            <TableContainer
+              component={Paper}
+              elevation={3}
+              sx={{ backgroundColor: "background.paper" }}
+            >
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell
+                      colSpan={2}
+                      sx={{
+                        backgroundColor: "background.default",
+                        color: "text.primary",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Wichtigste Daten
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>Akkukapazität</TableCell>
+                    <TableCell>{product.akkukapazitaet} Wh</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Garantie</TableCell>
+                    <TableCell>{product.garantie} Jahre</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Max. Eingang</TableCell>
+                    <TableCell>{product.maxEingang}</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+
+            <Accordion sx={{ backgroundColor: "background.paper", borderRadius: 2 }}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                sx={{ backgroundColor: "background.default", borderRadius: 2 }}
+                onClick={() => setOpen(!open)}
               >
-                <Table size="small">
-                  <TableBody>
-                    {[
+                <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
+                  Alle Eigenschaften anzeigen
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <TableContainer
+                  component={Paper}
+                  elevation={2}
+                  sx={{ backgroundColor: "background.paper" }}
+                >
+                  <Table size="small">
+                    <TableBody>
+                      {[
                         { key: "akkukapazitaet", label: "Akkukapazität" },
                         { key: "maxKapazitaet", label: "Max. Kapazität" },
                         { key: "erweiterbar", label: "Erweiterbar", isBoolean: true },
@@ -161,26 +158,27 @@ export default function ProductDetailClient({ product }) {
                         { key: "wechselrichter", label: "Mit Wechselrichter", isBoolean: true },
                         { key: "bidirektional", label: "Bidirektional", isBoolean: true },
                         { key: "ladeanschluss", label: "230V Ladeanschluss", isBoolean: true },
+                        { key: "asin", label: "Preis: ", isBoolean: true },
                       ].map(({ key, label, isBoolean }) => {
-                      const value = product[key];
-                      let displayValue = value;
-                      if (typeof value === "boolean" && isBoolean) {
-                        displayValue = value ? "Ja" : "Nein";
-                      }
-                      return (
-                        <TableRow key={key}>
-                          <TableCell>{label}</TableCell>
-                          <TableCell>{displayValue}</TableCell>
-                        </TableRow>
-                      );
-                    })}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </AccordionDetails>
-          </Accordion>
+                        const value = key === "asin" ? amazonPrice : product[key];
+                        let displayValue = value;
+                        if (typeof value === "boolean" && isBoolean) {
+                          displayValue = value ? "Ja" : "Nein";
+                        }
+                        return (
+                          <TableRow key={key}>
+                            <TableCell>{label}</TableCell>
+                            <TableCell>{displayValue}</TableCell>
+                          </TableRow>
+                        );
+                      })}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </AccordionDetails>
+            </Accordion>
 
-          <Box>
+            <Box>
               <Typography sx={{ color: "text.primary" }} variant="body1" gutterBottom>
                 Kurze Produktbeschreibung:
               </Typography>
@@ -235,7 +233,12 @@ export default function ProductDetailClient({ product }) {
               <Typography sx={{ color: "text.primary" }} variant="body1" gutterBottom>
                 Weitere Infos direkt beim Hersteller:
               </Typography>
-              <Link href={product.website} target="_blank" rel="noopener noreferrer" sx={{ color: "primary.light" }}>
+              <Link
+                href={product.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{ color: "primary.light" }}
+              >
                 {product.website}
               </Link>
             </Box>
@@ -286,6 +289,6 @@ export default function ProductDetailClient({ product }) {
         </Container>
         <Footer />
       </ThemeProvider>
-   
+    </>
   );
 }
