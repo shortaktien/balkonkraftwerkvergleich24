@@ -22,7 +22,7 @@ import {
 
 export default function MaterialUITable() {
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5); 
+    const [rowsPerPage, setRowsPerPage] = React.useState(10); 
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('name');
     const [minAkkukapazitaet, setMinAkkukapazitaet] = useState("");
@@ -507,7 +507,7 @@ export default function MaterialUITable() {
         </TableContainer>
 
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[10, 20, 50]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
