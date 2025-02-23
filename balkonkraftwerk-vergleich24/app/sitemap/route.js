@@ -24,6 +24,7 @@ export async function GET() {
     "zendure-ab2000",
     "zendure-ab2000s",
     "solmate-maxxicharge-1-5",
+    "growatt-nexa-2000",
   ];
 
   // 📌 Erstelle die URLs mit `lastmod`
