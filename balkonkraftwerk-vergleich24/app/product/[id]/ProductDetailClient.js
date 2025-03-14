@@ -1,7 +1,8 @@
 // app/product/[id]/ProductDetailClient.js
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { DarkModeContext } from "../../context/DarkModeContext";
 import Header from "../../Header";
 import Footer from "../../Footer";
 import {
@@ -44,12 +45,20 @@ const darkTheme = createTheme({
 
 export default function ProductDetailClient({ product, amazonPrice }) {
   const [open, setOpen] = useState(false);
+  const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
+
+    // Optional: Passe auch den Body-Hintergrund an, falls nötig.
+    useEffect(() => {
+      document.body.style.backgroundColor = isDarkMode
+        ? darkTheme.palette.background.default
+        : lightTheme.palette.background.default;
+    }, [isDarkMode]);
 
   return (
     <>
-      <ThemeProvider theme={lightTheme}>
+      <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
         <CssBaseline />
-        <Header />
+        <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
         <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
           <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
             <Typography

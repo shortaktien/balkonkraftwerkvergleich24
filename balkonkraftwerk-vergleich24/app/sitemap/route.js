@@ -25,7 +25,10 @@ export async function GET() {
     "zendure-ab2000s",
     "solmate-maxxicharge-1-5",
     "growatt-nexa-2000",
+    "anker-solix-solarbank-2-e1600-ac",
   ];
+
+  console.log("🚀 Geladene Produkte:", productIds);
 
   // 📌 Erstelle die URLs mit `lastmod`
   const urls = [
@@ -35,6 +38,14 @@ export async function GET() {
       lastmod: new Date().toISOString()
     })),
   ];
+
+  // Debug: Prüfe, ob das gesuchte Produkt korrekt generiert wurde
+  const ankerProduct = urls.find(url => url.loc.includes("anker-solarbank-2-e1600-ac"));
+  console.log("🔍 Prüfe URL für anker-solarbank-2-e1600-ac:", ankerProduct);
+
+  if (!ankerProduct) {
+    console.error("❌ Produkt anker-solarbank-2-e1600-ac fehlt in der Sitemap!");
+  }
 
   // 📌 Generiere das XML für die Sitemap
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -48,6 +59,8 @@ export async function GET() {
       </url>`)
       .join("\n")}
   </urlset>`;
+
+  console.log("📜 Generierte Sitemap:", sitemap);
 
   return new Response(sitemap, {
     headers: {

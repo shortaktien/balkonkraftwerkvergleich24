@@ -14,6 +14,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Image from "next/image";
 import { HomeJsonLd } from "./utils/homeStructuredData";
 import Head from "next/head";
+import UpdatePopup from "./components/UpdatePopup";
 
 <Image src="/solar-icon.png" alt="Solar Icon" width={40} height={40} />
 
@@ -481,8 +482,9 @@ export default function Home() {
               </Typography>
             </Paper>
           </Box>
-              
+
           <Footer />
+          <UpdatePopup />
         </main>
       </div>
     </ThemeProvider>
