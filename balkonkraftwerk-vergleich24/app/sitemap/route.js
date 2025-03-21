@@ -25,7 +25,7 @@ export async function GET() {
     "zendure-ab2000s",
     "solmate-maxxicharge-1-5",
     "growatt-nexa-2000",
-    "anker-solix-solarbank-2-e1600-ac",
+    "anker-solarbank-2-e1600-ac",
   ];
 
   console.log("🚀 Geladene Produkte:", productIds);
