@@ -86,39 +86,18 @@ export default function RootLayout({ children }) {
         {/* ✅ Performance-Optimierung für Google Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-
-        {/* ✅ SEO: Strukturierte Daten JSON-LD */}
-        <Script
-          id="structured-data"
-          type="application/ld+json"
-          strategy="afterInteractive" // 🚀 Läd JSON-LD asynchron
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
-
-        {/* ✅ Kritische CSS inline setzen (Vermeidung von FOUC - Flash of Unstyled Content) */}
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-            body {
-              font-family: 'Geist', sans-serif;
-              background-color: #F0F8FF;
-              margin: 0;
-              padding: 0;
-            }
-            `,
-          }}
-        />
-
-        {/* ✅ CSS lazy-loaden für bessere Ladezeit */}
-        <link rel="stylesheet" href="/css/ac8beb2aa2892cf0.css" as="style" />
-        <link rel="stylesheet" href="/css/c468f4c3ae374853.css" as="style" />
       </Head>
 
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Providers>{children}</Providers>
 
         {/* ✅ Lazy-Loading für nicht-kritische Skripte */}
-        
+        <Script
+          id="structured-data"
+          type="application/ld+json"
+          strategy="afterInteractive" // 🚀 Läd JSON-LD asynchron
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
       </body>
     </html>
   );
