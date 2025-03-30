@@ -8,7 +8,7 @@ export const revalidate = 86400; // ISR: 24 Stunden
 
 export default async function ProductDetail({ params }) {
   const { id } = params;
-  const product = await getProduct(id);
+  const product = getProduct(id);
   if (!product) {
     return (
       <Container>
