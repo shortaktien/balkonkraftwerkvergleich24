@@ -26,6 +26,7 @@ export async function GET() {
     "solmate-maxxicharge-1-5",
     "growatt-nexa-2000",
     "anker-solarbank-2-e1600-ac",
+    "anker-solix-solarbank-3-e2700-pro"
   ];
 
   console.log("🚀 Geladene Produkte:", productIds);
