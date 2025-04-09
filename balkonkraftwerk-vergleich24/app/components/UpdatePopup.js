@@ -41,7 +41,17 @@ export default function UpdatePopup() {
           </Typography>
           {/* Weitere Patchnotes können hier hinzugefügt werden */}
           <Typography variant="body2" gutterBottom>
-            <strong>14.3.2025</strong>
+            <strong>09.04.2025</strong>
+          </Typography>
+          <List dense>
+            <ListItem>
+              <Typography variant="body2">
+                + Neuer Speicher "Anker Solix Solarbank 3 E2700 Pro"
+              </Typography>
+            </ListItem>
+          </List>
+          <Typography variant="body2" gutterBottom>
+            <strong>14.03.2025</strong>
           </Typography>
           <List dense>
             <ListItem>
