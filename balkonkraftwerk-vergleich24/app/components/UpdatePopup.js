@@ -46,7 +46,7 @@ export default function UpdatePopup() {
           <List dense>
             <ListItem>
               <Typography variant="body2">
-                + Neuer Speicher "Anker Solix Solarbank 3 E2700 Pro"
+                + Neuer Speicher Anker Solix Solarbank 3 E2700 Pro
               </Typography>
             </ListItem>
           </List>
