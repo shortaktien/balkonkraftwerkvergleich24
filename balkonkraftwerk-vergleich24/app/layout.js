@@ -73,52 +73,45 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const structuredData = generateStructuredData(products); // JSON-LD generieren
+  const structuredData = generateStructuredData(products);
 
   return (
     <html lang="de">
       <Head>
-        {/* ✅ Mobile Optimierung */}
+        {/* Meta-Tags und Preconnect */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Balkonspeicher Vergleich 24" />
-        
-        {/* ✅ Performance-Optimierung für Google Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
-        {/* ✅ SEO: Strukturierte Daten JSON-LD */}
-        <Script
-          id="structured-data"
-          type="application/ld+json"
-          strategy="afterInteractive" // 🚀 Läd JSON-LD asynchron
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
-
-        {/* ✅ Kritische CSS inline setzen (Vermeidung von FOUC - Flash of Unstyled Content) */}
+        {/* Kritische CSS inline */}
         <style
           dangerouslySetInnerHTML={{
             __html: `
-            body {
-              font-family: 'Geist', sans-serif;
-              background-color: #F0F8FF;
-              margin: 0;
-              padding: 0;
-            }
+              body {
+                font-family: 'Geist', sans-serif;
+                background-color: #F0F8FF;
+                margin: 0;
+                padding: 0;
+              }
             `,
           }}
         />
-
-        {/* ✅ CSS lazy-loaden für bessere Ladezeit */}
-        <link rel="stylesheet" href="/css/ac8beb2aa2892cf0.css" as="style" />
-        <link rel="stylesheet" href="/css/c468f4c3ae374853.css" as="style" />
       </Head>
 
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Providers>{children}</Providers>
 
-        {/* ✅ Lazy-Loading für nicht-kritische Skripte */}
-        
+        {/* JSON-LD Script außerhalb des Head-Bereichs */}
+        <Script
+          id="structured-data"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+
+        {/* Wenn du externe CSS-Dateien brauchst, importiere sie lieber global oder nutze ein CSS-in-JS-Lösung */}
       </body>
     </html>
   );

@@ -119,7 +119,7 @@ export default function Home() {
               </Typography>
 
               <Typography variant="h4" fontWeight="bold" sx={{ mb: 2 }}>
-                🔍 So funktioniert's:
+                🔍 So funktionierts:
               </Typography>
 
               <Typography variant="body2" sx={{ maxWidth: "600px", mx: "auto", mb: 1, color: "text.secondary" }}>

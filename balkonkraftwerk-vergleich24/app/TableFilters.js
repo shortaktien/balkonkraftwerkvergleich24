@@ -55,7 +55,7 @@ export default function TableFilters({ filters, setFilters, minAkkukapazitaet, s
                     <Box sx={{marginBottom: '10px'}}>
                     <p>Hier kannst du die Eigenschaften filtern.</p>
                     <p>Beispiel: Wenn dein Balkonspeicher unbedingt eine App haben muss, aktiviere 
-                        die Checkbox "App". Dann werden nur Balkonspeicher angezeigt, die eine App unterstützen. Du kannst beliebig viele Filter gleichzeitig nutzen.
+                        die Checkbox App. Dann werden nur Balkonspeicher angezeigt, die eine App unterstützen. Du kannst beliebig viele Filter gleichzeitig nutzen.
                     </p>
                     </Box>
                     
