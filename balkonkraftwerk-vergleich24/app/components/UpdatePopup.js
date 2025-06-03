@@ -41,6 +41,17 @@ export default function UpdatePopup() {
           </Typography>
           {/* Weitere Patchnotes können hier hinzugefügt werden */}
           <Typography variant="body2" gutterBottom>
+            <strong>03.06.2025</strong>
+          </Typography>
+          <List dense>
+            <ListItem>
+              <Typography variant="body2">
+                + Erneuerung vom Zertifikat für Sicherheit
+                
+              </Typography>
+            </ListItem>
+          </List>
+          <Typography variant="body2" gutterBottom>
             <strong>09.04.2025</strong>
           </Typography>
           <List dense>

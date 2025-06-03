@@ -4,7 +4,20 @@ import { generateProductJsonLd } from "../../utils/structuredData";
 
 // Produkt serverseitig abrufen
 export function getProduct(id) {
-  return products.find((p) => p.id === id) || null;
+  try {
+    if (!id) {
+      console.error('Keine Produkt-ID angegeben');
+      return null;
+    }
+    const product = products.find((p) => p.id === id);
+    if (!product) {
+      console.error(`Produkt mit ID ${id} nicht gefunden`);
+    }
+    return product || null;
+  } catch (error) {
+    console.error('Fehler beim Abrufen des Produkts:', error);
+    return null;
+  }
 }
 
 // JSON-LD serverseitig generieren
@@ -26,8 +39,15 @@ export async function getAmazonPrice(asin) {
     return null;
   }
   try {
-    // Hier rufst du deine API-Route (oder einen externen Service) ab.
-    const res = await fetch(`/api/amazon?asin=${asin}`);
+    // Use absolute URL in production, relative in development
+    const apiUrl = process.env.NODE_ENV === 'production' 
+      ? 'https://balkonspeicher24.shortaktien.de/api/amazon'
+      : '/api/amazon';
+      
+    const res = await fetch(`${apiUrl}?asin=${encodeURIComponent(asin)}`);
+    if (!res.ok) {
+      throw new Error(`API request failed with status ${res.status}`);
+    }
     const data = await res.json();
     const item = data.ItemsResult?.Items[0];
     const priceInfo = item?.Offers?.Listings[0]?.Price;

@@ -1,14 +1,37 @@
 // app/product/[id]/page.js
-import { getProduct, ProductJsonLd, getAmazonPrice } from "./ProductData";
-import Head from "next/head";
+import { getProduct, ProductJsonLd } from "./ProductData";
 import { Container, Typography } from "@mui/material";
 import ProductDetailClient from "./ProductDetailClient";
 
 export const revalidate = 86400; // ISR: 24 Stunden
 
-export default async function ProductDetail({ params }) {
-  const { id } = params;
+// Statische Generierung für alle bekannten Produkte
+export async function generateStaticParams() {
+  try {
+    const products = await import('../../products.json');
+    return products.default.map((product) => ({
+      id: product.id,
+    }));
+  } catch (error) {
+    console.error('Fehler beim Generieren der statischen Params:', error);
+    return [];
+  }
+}
+
+export default function ProductDetail({ params }) {
+  // Einfache Implementierung ohne async/await
+  const id = params?.id;
+  
+  if (!id) {
+    return (
+      <Container>
+        <Typography variant="h5">Fehler: Keine Produkt-ID angegeben</Typography>
+      </Container>
+    );
+  }
+
   const product = getProduct(id);
+  
   if (!product) {
     return (
       <Container>
@@ -17,17 +40,9 @@ export default async function ProductDetail({ params }) {
     );
   }
 
-  // Amazon-Preis wird serverseitig abgerufen.
-  const amazonPrice = await getAmazonPrice(product.asin);
-
   return (
     <>
-      <Head>
-        <title>{product.name} | Balkonspeicher24</title>
-        <ProductJsonLd id={id} />
-      </Head>
-      {/* Übergabe des Produktobjekts plus des serverseitig abgerufenen Preises */}
-      <ProductDetailClient product={product} amazonPrice={amazonPrice} />
+      <ProductDetailClient product={product} amazonPrice={null} />
     </>
   );
 }
