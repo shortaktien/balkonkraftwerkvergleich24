@@ -1,17 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
-function AmazonPrice({ asin, cached }) {
+function AmazonPrice({ asin, cached, cacheLoaded }) {
     const [priceData, setPriceData] = useState(cached);
     const [error, setError] = useState(null);
+    const fetched = useRef(false);
 
     useEffect(() => {
+      if (!cacheLoaded) return;
       if (!asin || asin === "-") return;
-      if (cached) {
+      if (fetched.current) return;
+
+      if (cached !== undefined) {
         setPriceData(cached);
+        fetched.current = true;
         return;
       }
+
+      fetched.current = true;
       console.log("Preisabfrage f\xC3\xBCr", asin);
       fetch(`/api/amazon?asin=${asin}`)
         .then((res) => res.json())
@@ -19,7 +26,7 @@ function AmazonPrice({ asin, cached }) {
           setPriceData(data);
         })
         .catch((err) => setError(err.message));
-    }, [asin, cached]);
+    }, [asin, cached, cacheLoaded]);
 
     if (!asin || asin === "-") {
         return <div>Preis manuell prüfen</div>;

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect } from 'react';
 import Link from "next/link";
 import { 
@@ -57,12 +59,21 @@ export default function MaterialUITable() {
   });
 
   const [priceCache, setPriceCache] = useState({});
+  const [cacheLoaded, setCacheLoaded] = useState(false);
 
   useEffect(() => {
-    fetch('/api/amazon/cache')
-      .then((res) => res.json())
-      .then((data) => setPriceCache(data))
-      .catch(() => {});
+    async function loadCache() {
+      try {
+        const res = await fetch('/api/amazon/cache');
+        const data = await res.json();
+        setPriceCache(data);
+      } catch {
+        // ignore errors, we will fallback to live fetches
+      } finally {
+        setCacheLoaded(true);
+      }
+    }
+    loadCache();
   }, []);
 
 
@@ -456,7 +467,7 @@ export default function MaterialUITable() {
                     </TableCell>)}
                       
                     <TableCell style={{ width: 150 }}>
-                      <AmazonPrice asin={row.asin} cached={priceCache[row.asin]} />
+                      <AmazonPrice asin={row.asin} cached={priceCache[row.asin]} cacheLoaded={cacheLoaded} />
                     </TableCell>
 
                     <TableCell>
