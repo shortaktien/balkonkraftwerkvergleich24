@@ -49,9 +49,7 @@ export async function getAmazonPrice(asin) {
       throw new Error(`API request failed with status ${res.status}`);
     }
     const data = await res.json();
-    const item = data.ItemsResult?.Items[0];
-    const priceInfo = item?.Offers?.Listings[0]?.Price;
-    return priceInfo?.DisplayAmount || null;
+    return data.price || null;
   } catch (error) {
     console.error("Error fetching Amazon price:", error);
     return null;

@@ -1,6 +1,27 @@
 // app/api/amazon/price/route.js
 import aws4 from "aws4";
 import { URL } from "url";
+import { promises as fs } from "fs";
+import path from "path";
+
+const CACHE_FILE = path.join(process.cwd(), "app", "api", "amazon", "priceCache.json");
+
+async function readCache() {
+  try {
+    const data = await fs.readFile(CACHE_FILE, "utf8");
+    return JSON.parse(data);
+  } catch {
+    return {};
+  }
+}
+
+async function writeCache(cache) {
+  try {
+    await fs.writeFile(CACHE_FILE, JSON.stringify(cache, null, 2));
+  } catch (err) {
+    console.log("Fehler beim Schreiben des Cache:", err.message);
+  }
+}
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
@@ -14,6 +35,16 @@ export async function GET(request) {
   }
 
   console.log("Amazon-Request f\xFCr ASIN:", asin);
+
+  const cache = await readCache();
+  const cached = cache[asin];
+  if (cached && Date.now() - cached.timestamp < 86400 * 1000) {
+    console.log("Preis aus Cache f\xFCr", asin);
+    return new Response(
+      JSON.stringify({ price: cached.price, fromCache: true }),
+      { status: 200 }
+    );
+  }
 
   // Hole die Amazon-Partner-Zugangsdaten aus den Umgebungsvariablen
   const accessKey = process.env.AMAZON_ACCESS_KEY;
@@ -76,12 +107,19 @@ export async function GET(request) {
     });
     console.log("Mit Amazon verbunden");
     const data = await response.json();
-    if (data.ItemsResult?.Items?.length) {
+    const item = data.ItemsResult?.Items?.[0];
+    const priceInfo = item?.Offers?.Listings?.[0]?.Price?.DisplayAmount || null;
+    if (priceInfo) {
       console.log("Produkt gefunden f\xFCr", asin);
     } else {
       console.log("Kein Produkt f\xFCr", asin, "gefunden");
     }
-    return new Response(JSON.stringify(data), { status: 200 });
+    cache[asin] = { price: priceInfo, timestamp: Date.now() };
+    await writeCache(cache);
+    return new Response(
+      JSON.stringify({ price: priceInfo, fromCache: false }),
+      { status: 200 }
+    );
   } catch (error) {
     console.log("Fehler bei Amazon-Anfrage:", error.message);
     return new Response(

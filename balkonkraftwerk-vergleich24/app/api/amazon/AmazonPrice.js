@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 function AmazonPrice({ asin }) {
-    const [price, setPrice] = useState(null);
+    const [price, setPrice] = useState();
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -12,18 +12,17 @@ function AmazonPrice({ asin }) {
       fetch(`/api/amazon?asin=${asin}`)
         .then((res) => res.json())
         .then((data) => {
-          const item = data.ItemsResult?.Items[0];
-          const priceInfo = item?.Offers?.Listings[0]?.Price;
-          setPrice(priceInfo?.DisplayAmount);
+          setPrice(data.price);
         })
         .catch((err) => setError(err.message));
     }, [asin]);
 
     if (!asin || asin === "-") {
-        return <div>Kein Preis gefunden</div>;
+        return <div>Preis manuell prüfen</div>;
     }
     if (error) return <div style={{ color: "red" }}>Fehler: {error}</div>;
-    if (!price) return <div>Lade Preis...</div>;
+    if (price === undefined) return <div>Lade Preis...</div>;
+    if (price === null) return <div>Preis manuell prüfen</div>;
     return <div>{price}</div>;
 }
 
