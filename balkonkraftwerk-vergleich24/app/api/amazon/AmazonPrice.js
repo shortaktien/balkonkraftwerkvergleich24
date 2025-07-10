@@ -8,14 +8,16 @@ function AmazonPrice({ asin, cached, cacheLoaded }) {
     const fetched = useRef(false);
 
     useEffect(() => {
+      if (!cacheLoaded) return;
       if (!asin || asin === "-") return;
       if (fetched.current) return;
-      if (!cacheLoaded) return;
+
       if (cached !== undefined) {
         setPriceData(cached);
         fetched.current = true;
         return;
       }
+
       fetched.current = true;
       console.log("Preisabfrage f\xC3\xBCr", asin);
       fetch(`/api/amazon?asin=${asin}`)
