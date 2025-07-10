@@ -41,7 +41,7 @@ export async function GET(request) {
   if (cached && Date.now() - cached.timestamp < 86400 * 1000) {
     console.log("Preis aus Cache f\xFCr", asin);
     return new Response(
-      JSON.stringify({ price: cached.price, fromCache: true }),
+      JSON.stringify({ price: cached.price, listPrice: cached.listPrice, fromCache: true }),
       { status: 200 }
     );
   }
@@ -108,16 +108,26 @@ export async function GET(request) {
     console.log("Mit Amazon verbunden");
     const data = await response.json();
     const item = data.ItemsResult?.Items?.[0];
-    const priceInfo = item?.Offers?.Listings?.[0]?.Price?.DisplayAmount || null;
-    if (priceInfo) {
+    const listing = item?.Offers?.Listings?.[0];
+    const priceObj = listing?.Price;
+    const price = priceObj?.DisplayAmount || null;
+    let listPrice = null;
+    if (priceObj && priceObj.Savings && typeof priceObj.Amount === "number") {
+      const originalAmount = priceObj.Amount + priceObj.Savings.Amount;
+      listPrice = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: priceObj.Currency,
+      }).format(originalAmount);
+    }
+    if (price) {
       console.log("Produkt gefunden f\xFCr", asin);
     } else {
       console.log("Kein Produkt f\xFCr", asin, "gefunden");
     }
-    cache[asin] = { price: priceInfo, timestamp: Date.now() };
+    cache[asin] = { price, listPrice, timestamp: Date.now() };
     await writeCache(cache);
     return new Response(
-      JSON.stringify({ price: priceInfo, fromCache: false }),
+      JSON.stringify({ price, listPrice, fromCache: false }),
       { status: 200 }
     );
   } catch (error) {
