@@ -47,6 +47,22 @@ export default function ProductDetailClient({ product, amazonPrice }) {
   const [open, setOpen] = useState(false);
   const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
 
+  const renderAmazonPrice = (priceObj) => {
+    if (!priceObj || priceObj.price === null) {
+      return "Preis manuell prüfen";
+    }
+    const { price, listPrice } = priceObj;
+    if (listPrice && listPrice !== price) {
+      return (
+        <>
+          <span style={{ color: "red", fontWeight: "bold" }}>{price}</span>{" "}
+          <span style={{ textDecoration: "line-through", marginLeft: 4 }}>{listPrice}</span>
+        </>
+      );
+    }
+    return price;
+  };
+
     // Optional: Passe auch den Body-Hintergrund an, falls nötig.
     useEffect(() => {
       document.body.style.backgroundColor = isDarkMode
@@ -169,7 +185,7 @@ export default function ProductDetailClient({ product, amazonPrice }) {
                         { key: "ladeanschluss", label: "230V Ladeanschluss", isBoolean: true },
                         { key: "asin", label: "Preis: ", isBoolean: true },
                       ].map(({ key, label, isBoolean }) => {
-                        const value = key === "asin" ? amazonPrice : product[key];
+                        const value = key === "asin" ? renderAmazonPrice(amazonPrice) : product[key];
                         let displayValue = value;
                         if (typeof value === "boolean" && isBoolean) {
                           displayValue = value ? "Ja" : "Nein";
