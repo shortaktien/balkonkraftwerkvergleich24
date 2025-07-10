@@ -18,7 +18,7 @@ import {
  import rows from './products.json';
  import TableFilters from './TableFilters';
  import TableUserSettings from './TableUserSettings';
- import AmazonPrice from "./api/amazon/AmazonPrice";
+import AmazonPrice from "./api/amazon/AmazonPrice";
 
 export default function MaterialUITable() {
     const [page, setPage] = React.useState(0);
@@ -446,16 +446,9 @@ export default function MaterialUITable() {
                         <Link href={row.website} underline="hover" target="_blank" rel="noopener noreferrer">{'Hersteller Seite'}</Link>
                     </TableCell>)}
                       
-                    <TableCell style={{ width: 150}}>
-                      {row.AmazonPrice ? (
-                        <div>{row.amazonPrice}</div>
-                      ) : (
-                        <p>
-                          Nicht gefunden
-                        </p>
-                      )
-                      }
-                    </TableCell> 
+                    <TableCell style={{ width: 150 }}>
+                      <AmazonPrice asin={row.asin} />
+                    </TableCell>
 
                     <TableCell>
                       {row.amazon && row.amazon !== "-" ? (

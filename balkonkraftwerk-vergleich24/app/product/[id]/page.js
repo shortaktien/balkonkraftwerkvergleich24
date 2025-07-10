@@ -1,5 +1,5 @@
 // app/product/[id]/page.js
-import { getProduct, ProductJsonLd } from "./ProductData";
+import { getProduct, getAmazonPrice, ProductJsonLd } from "./ProductData";
 import { Container, Typography } from "@mui/material";
 import ProductDetailClient from "./ProductDetailClient";
 
@@ -18,8 +18,7 @@ export async function generateStaticParams() {
   }
 }
 
-export default function ProductDetail({ params }) {
-  // Einfache Implementierung ohne async/await
+export default async function ProductDetail({ params }) {
   const id = params?.id;
   
   if (!id) {
@@ -40,9 +39,12 @@ export default function ProductDetail({ params }) {
     );
   }
 
+  const amazonPrice = await getAmazonPrice(product.asin);
+
   return (
     <>
-      <ProductDetailClient product={product} amazonPrice={null} />
+      <ProductJsonLd id={id} />
+      <ProductDetailClient product={product} amazonPrice={amazonPrice} />
     </>
   );
 }
