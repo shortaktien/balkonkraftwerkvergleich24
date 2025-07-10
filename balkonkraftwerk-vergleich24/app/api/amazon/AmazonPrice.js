@@ -8,6 +8,7 @@ function AmazonPrice({ asin }) {
 
     useEffect(() => {
       if (!asin || asin === "-") return;
+      console.log("Preisabfrage f\xC3\xBCr", asin);
       fetch(`/api/amazon?asin=${asin}`)
         .then((res) => res.json())
         .then((data) => {
