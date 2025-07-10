@@ -60,15 +60,18 @@ export default function MaterialUITable() {
   const [cacheLoaded, setCacheLoaded] = useState(false);
 
   useEffect(() => {
-    fetch('/api/amazon/cache')
-      .then((res) => res.json())
-      .then((data) => {
+    async function loadCache() {
+      try {
+        const res = await fetch('/api/amazon/cache');
+        const data = await res.json();
         setPriceCache(data);
+      } catch {
+        // ignore errors, we will fallback to live fetches
+      } finally {
         setCacheLoaded(true);
-      })
-      .catch(() => {
-        setCacheLoaded(true);
-      });
+      }
+    }
+    loadCache();
   }, []);
 
 
