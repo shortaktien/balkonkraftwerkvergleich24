@@ -28,6 +28,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Amazon price cache
+/app/api/amazon/priceCache.json
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
