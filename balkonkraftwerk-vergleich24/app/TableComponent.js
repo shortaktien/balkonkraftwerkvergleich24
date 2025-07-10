@@ -57,12 +57,18 @@ export default function MaterialUITable() {
   });
 
   const [priceCache, setPriceCache] = useState({});
+  const [cacheLoaded, setCacheLoaded] = useState(false);
 
   useEffect(() => {
     fetch('/api/amazon/cache')
       .then((res) => res.json())
-      .then((data) => setPriceCache(data))
-      .catch(() => {});
+      .then((data) => {
+        setPriceCache(data);
+        setCacheLoaded(true);
+      })
+      .catch(() => {
+        setCacheLoaded(true);
+      });
   }, []);
 
 
@@ -456,7 +462,7 @@ export default function MaterialUITable() {
                     </TableCell>)}
                       
                     <TableCell style={{ width: 150 }}>
-                      <AmazonPrice asin={row.asin} cached={priceCache[row.asin]} />
+                      <AmazonPrice asin={row.asin} cached={priceCache[row.asin]} cacheLoaded={cacheLoaded} />
                     </TableCell>
 
                     <TableCell>

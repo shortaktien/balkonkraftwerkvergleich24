@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react";
 
-function AmazonPrice({ asin, cached }) {
+function AmazonPrice({ asin, cached, cacheLoaded }) {
     const [priceData, setPriceData] = useState(cached);
     const [error, setError] = useState(null);
 
     useEffect(() => {
       if (!asin || asin === "-") return;
-      if (cached) {
+      if (!cacheLoaded) return;
+      if (cached !== undefined) {
         setPriceData(cached);
         return;
       }
@@ -19,7 +20,7 @@ function AmazonPrice({ asin, cached }) {
           setPriceData(data);
         })
         .catch((err) => setError(err.message));
-    }, [asin, cached]);
+    }, [asin, cached, cacheLoaded]);
 
     if (!asin || asin === "-") {
         return <div>Preis manuell prüfen</div>;
