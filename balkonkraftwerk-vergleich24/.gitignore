@@ -35,6 +35,11 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.production
 
 # vercel
 .vercel
@@ -43,6 +48,3 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-AMAZON_ACCESS_KEY=dein_access_key
-AMAZON_SECRET_KEY=dein_secret_key
-AMAZON_PARTNER_TAG=dein_partner_tag
