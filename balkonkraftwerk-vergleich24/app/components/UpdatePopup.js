@@ -41,6 +41,18 @@ export default function UpdatePopup() {
           </Typography>
           {/* Weitere Patchnotes können hier hinzugefügt werden */}
           <Typography variant="body2" gutterBottom>
+            <strong>10.07.2025</strong>
+          </Typography>
+          <List dense>
+            <ListItem>
+              <Typography variant="body2">
+                + Preise werden jetzt aktualisiert und angezeigt eventuell öfters nachladen
+                + Favicon aktualisiert
+                + Komplette EcoFlow Stream Reihe hinzugefügt
+              </Typography>
+            </ListItem>
+          </List>
+          <Typography variant="body2" gutterBottom>
             <strong>03.06.2025</strong>
           </Typography>
           <List dense>
