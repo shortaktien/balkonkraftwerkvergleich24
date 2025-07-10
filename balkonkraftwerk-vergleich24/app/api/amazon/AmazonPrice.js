@@ -8,11 +8,38 @@ function AmazonPrice({ asin }) {
 
     useEffect(() => {
       if (!asin || asin === "-") return;
+
+      const cacheKey = `amazon_price_${asin}`;
+      try {
+        const cachedStr = localStorage.getItem(cacheKey);
+        if (cachedStr) {
+          const cached = JSON.parse(cachedStr);
+          if (Date.now() - cached.timestamp < 24 * 60 * 60 * 1000) {
+            setPriceData({ price: cached.price, listPrice: cached.listPrice });
+            return;
+          }
+        }
+      } catch (err) {
+        console.log("Fehler beim Lesen aus localStorage:", err);
+      }
+
       console.log("Preisabfrage f\xC3\xBCr", asin);
       fetch(`/api/amazon?asin=${asin}`)
         .then((res) => res.json())
         .then((data) => {
           setPriceData(data);
+          try {
+            localStorage.setItem(
+              cacheKey,
+              JSON.stringify({
+                price: data.price,
+                listPrice: data.listPrice,
+                timestamp: Date.now(),
+              })
+            );
+          } catch (err) {
+            console.log("Fehler beim Schreiben in localStorage:", err);
+          }
         })
         .catch((err) => setError(err.message));
     }, [asin]);
