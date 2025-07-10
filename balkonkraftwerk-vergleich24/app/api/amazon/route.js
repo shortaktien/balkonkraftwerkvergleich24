@@ -7,23 +7,28 @@ export async function GET(request) {
   const asin = searchParams.get("asin");
 
   if (!asin || asin === "-") {
-    return new Response( 
+    return new Response(
       JSON.stringify({error:" Keine ASIN angegeben. Bitte melden."}),
       { status: 400}
     );
   }
 
+  console.log("Amazon-Request f\xFCr ASIN:", asin);
+
   // Hole die Amazon-Partner-Zugangsdaten aus den Umgebungsvariablen
   const accessKey = process.env.AMAZON_ACCESS_KEY;
   const secretKey = process.env.AMAZON_SECRET_KEY;
   const partnerTag = process.env.AMAZON_PARTNER_TAG;
-  
+
   if (!accessKey || !secretKey || !partnerTag) {
+    console.log("Amazon-Zugangsdaten fehlen");
     return new Response(
       JSON.stringify({ error: "Amazon-API-Zugangsdaten nicht konfiguriert." }),
       { status: 500 }
     );
   }
+
+  console.log("Amazon-Zugangsdaten geladen");
 
   // Für den deutschen Markt: 
   const region = "eu-west-1"; 
@@ -63,14 +68,22 @@ export async function GET(request) {
   //console.log("Signierte Optionen:", options);
 
   try {
+    console.log("Verbinde zu Amazon...");
     const response = await fetch(endpoint, {
       method: options.method,
       headers: options.headers,
       body: options.body,
     });
+    console.log("Mit Amazon verbunden");
     const data = await response.json();
+    if (data.ItemsResult?.Items?.length) {
+      console.log("Produkt gefunden f\xFCr", asin);
+    } else {
+      console.log("Kein Produkt f\xFCr", asin, "gefunden");
+    }
     return new Response(JSON.stringify(data), { status: 200 });
   } catch (error) {
+    console.log("Fehler bei Amazon-Anfrage:", error.message);
     return new Response(
       JSON.stringify({ error: error.message }),
       { status: 500 }
