@@ -47,7 +47,7 @@ export default function UpdatePopup() {
             <ListItem>
               <Typography variant="body2">
                 + Preise für Produkte sollten sich nun automatisch aktualisieren   
-                ++ "Über Uns" und "FAQ" Seiten hinzugefügt   
+                ++ Über Uns und FAQ Seiten hinzugefügt   
                 ++ SEO Optimierung          
               </Typography>
               
