@@ -10,6 +10,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Head from "next/head";
 import { FaqJsonLd } from "../utils/faqStructuredData";
+import PageLayout from "../PageLayout";
 
 const faqs = [
   {
@@ -41,23 +42,25 @@ export default function FaqPage() {
         <link rel="canonical" href="https://balkonspeicher24.shortaktien.de/faq" />
         <FaqJsonLd faqs={faqs} />
       </Head>
-      <Container maxWidth="md" sx={{ my: 4 }}>
-        <Paper sx={{ p: 4, boxShadow: 3 }}>
-          <Typography variant="h4" gutterBottom>
-            Häufige Fragen (FAQ)
-          </Typography>
-          {faqs.map((faq, index) => (
-            <Accordion key={index}>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography variant="subtitle1">{faq.question}</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography variant="body1">{faq.answer}</Typography>
-              </AccordionDetails>
-            </Accordion>
-          ))}
-        </Paper>
-      </Container>
+      <PageLayout>
+        <Container maxWidth="md" sx={{ my: 4 }}>
+          <Paper sx={{ p: 4, boxShadow: 3 }}>
+            <Typography variant="h4" gutterBottom>
+              Häufige Fragen (FAQ)
+            </Typography>
+            {faqs.map((faq, index) => (
+              <Accordion key={index}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                  <Typography variant="subtitle1">{faq.question}</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography variant="body1">{faq.answer}</Typography>
+                </AccordionDetails>
+              </Accordion>
+            ))}
+          </Paper>
+        </Container>
+      </PageLayout>
     </>
   );
 }
