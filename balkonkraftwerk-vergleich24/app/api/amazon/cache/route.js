@@ -13,7 +13,10 @@ export async function GET() {
   } catch (err) {
     return new Response(
       JSON.stringify({ error: "Cache not found" }),
-      { status: 500 }
+      {
+        status: 404,
+        headers: { "Content-Type": "application/json" },
+      }
     );
   }
 }

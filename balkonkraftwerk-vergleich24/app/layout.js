@@ -8,11 +8,13 @@ import products from "./products.json";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 // 🟢 **Generiere JSON-LD für strukturierte Daten**
