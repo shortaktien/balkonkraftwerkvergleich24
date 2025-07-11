@@ -41,6 +41,19 @@ export default function UpdatePopup() {
           </Typography>
           {/* Weitere Patchnotes können hier hinzugefügt werden */}
           <Typography variant="body2" gutterBottom>
+            <strong>11.07.2025</strong>
+          </Typography>
+          <List dense>
+            <ListItem>
+              <Typography variant="body2">
+                + Preise für Produkte sollten sich nun automatisch aktualisieren   
+                ++ "Über Uns" und "FAQ" Seiten hinzugefügt   
+                ++ SEO Optimierung          
+              </Typography>
+              
+            </ListItem>
+          </List>
+          <Typography variant="body2" gutterBottom>
             <strong>03.06.2025</strong>
           </Typography>
           <List dense>

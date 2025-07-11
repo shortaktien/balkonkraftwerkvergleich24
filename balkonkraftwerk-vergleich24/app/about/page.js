@@ -36,6 +36,10 @@ export default function AboutPage() {
               Recherche. Transparenz und Aktualität stehen dabei für uns im
               Vordergrund.
             </Typography>
+            <Typography variant="body1" gutterBottom>
+             Sollte doch etwas Falsch sein oder du hast etwas neues Entdeckt, dann nutze einfachen auf der Startseite den
+             Bug melden Button und sende uns eine Mail.
+            </Typography>
           </Paper>
         </Container>
       </PageLayout>

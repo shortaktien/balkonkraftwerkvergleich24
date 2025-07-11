@@ -1,1 +1,22 @@
-{}
+{
+  "B0DFPW2Y2C": {
+    "price": "899,99 €",
+    "listPrice": "999,00 €",
+    "timestamp": 1752249277998
+  },
+  "B0D1X82HDL": {
+    "price": "999,00 €",
+    "listPrice": "1.199,00 €",
+    "timestamp": 1752249289290
+  },
+  "B0DFCCGQ6K": {
+    "price": null,
+    "listPrice": null,
+    "timestamp": 1752249291730
+  },
+  "B0D1XMRC56": {
+    "price": "799,00 €",
+    "listPrice": "999,00 €",
+    "timestamp": 1752249609918
+  }
+}
