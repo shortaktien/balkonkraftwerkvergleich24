@@ -11,8 +11,9 @@ import { motion } from "framer-motion";
 import Link from "@mui/material/Link";
 
 const pages = [
-  { name: "Balkon.Solar e.V.", url: "https://balkon.solar/" },
-  { name: "Dummylink", url: "#" }
+  { name: "Über uns", url: "/about" },
+  { name: "FAQ", url: "/faq" },
+  { name: "Balkon.Solar e.V.", url: "https://balkon.solar/" }
 ];
 
 const SUN_COUNT = 20;

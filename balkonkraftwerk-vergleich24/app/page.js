@@ -65,6 +65,7 @@ export default function Home() {
   return (
     <>
     <Head>
+      <link rel="canonical" href="https://balkonspeicher24.shortaktien.de" />
       <HomeJsonLd />
     </Head>
 

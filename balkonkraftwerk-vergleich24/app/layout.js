@@ -82,6 +82,7 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Balkonspeicher Vergleich 24" />
+        <link rel="canonical" href="https://balkonspeicher24.shortaktien.de" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
@@ -109,6 +110,21 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+
+        <Script
+          id="org-data"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Balkonspeicher24",
+              "url": "https://balkonspeicher24.shortaktien.de",
+              "logo": "https://balkonspeicher24.shortaktien.de/logo.png"
+            })
+          }}
         />
 
         {/* Wenn du externe CSS-Dateien brauchst, importiere sie lieber global oder nutze ein CSS-in-JS-Lösung */}
