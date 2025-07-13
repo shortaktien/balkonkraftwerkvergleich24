@@ -1,5 +1,4 @@
-export function GET() {
-  const robotsTxt = `User-agent: *
+User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /admin/
@@ -9,12 +8,3 @@ Disallow: /private/
 Disallow: /hidden/
 
 Sitemap: https://balkonspeicher24.shortaktien.de/sitemap.xml
-`;
-
-  return new Response(robotsTxt, {
-    status: 200,
-    headers: {
-      "Content-Type": "text/plain",
-    },
-  });
-}

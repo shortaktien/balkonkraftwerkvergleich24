@@ -1,18 +1,18 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
 import Providers from "./providers";
 import Script from "next/script"; 
-import Head from "next/head"; 
 import products from "./products.json";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 // 🟢 **Generiere JSON-LD für strukturierte Daten**
@@ -77,7 +77,7 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="de">
-      <Head>
+      <head>
         {/* Meta-Tags und Preconnect */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
@@ -85,21 +85,66 @@ export default function RootLayout({ children }) {
         <link rel="canonical" href="https://balkonspeicher24.shortaktien.de" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://balkonspeicher24.shortaktien.de" />
 
         {/* Kritische CSS inline */}
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-              body {
-                font-family: 'Geist', sans-serif;
-                background-color: #F0F8FF;
-                margin: 0;
-                padding: 0;
-              }
-            `,
-          }}
-        />
-      </Head>
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `
+                :root {
+                  --background: #ffffff;
+                  --foreground: #171717;
+                }
+
+                @media (prefers-color-scheme: dark) {
+                  :root {
+                    --background: #0a0a0a;
+                    --foreground: #ededed;
+                  }
+                }
+
+                html,
+                body {
+                  max-width: 100%;
+                  overflow-x: hidden;
+                }
+
+                body {
+                  color: var(--foreground);
+                  background: var(--background);
+                  font-family: 'Geist', sans-serif;
+                  -webkit-font-smoothing: antialiased;
+                  -moz-osx-font-smoothing: grayscale;
+                  margin: 0;
+                  padding: 0;
+                }
+
+                * {
+                  box-sizing: border-box;
+                  padding: 0;
+                  margin: 0;
+                }
+
+                a {
+                  color: inherit;
+                  text-decoration: none;
+                }
+
+                @media (prefers-color-scheme: dark) {
+                  html {
+                    color-scheme: dark;
+                  }
+                }
+
+                .table-container {
+                  overflow-x: auto; /* Ermöglicht den horizontalen Scroll */
+                  width: 100%;
+                  max-width: 100%;
+                }
+              `,
+            }}
+          />
+      </head>
 
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Providers>{children}</Providers>
